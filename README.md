@@ -28,6 +28,9 @@ We'll now create a fragment to list our data.
 
 ### Part 4 - Add a second fragment for tablets
 1. Create a new `activity_main` layout for displays with the `smallest screen width` of 600dp
+
+<img src="./AS_NewLayout.png">
+
 2. Copy your old layout to this one. Add a `FrameLayout` for your details fragment, be sure to include an id and size it how you want both fragments to appear
 3. Create another new fragment, but this time select `Fragment (Blank)`DetailsFragment
 4. In the new layout, add fields to display your data
