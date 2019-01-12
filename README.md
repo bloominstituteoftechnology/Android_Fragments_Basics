@@ -54,6 +54,4 @@ We'll now create a fragment to list our data.
 
 #### Challenge
 
-Improve the get random comic feature, by only retrieving unseen comics until they have all been viewed.
-
-Add a list of history to the favorites page
+Change the detail activity to be a popup diaplog instead of a separate activity or screen.
