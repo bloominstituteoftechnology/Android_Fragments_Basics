@@ -4,12 +4,22 @@ import java.io.Serializable;
 
 public class Person implements Serializable {
     private String firstName, lastName, email, phone;
+    private int id;
 
-    public Person(String firstName, String lastName, String email, String phone) {
+    public Person(String firstName, String lastName, String email, String phone, int id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
