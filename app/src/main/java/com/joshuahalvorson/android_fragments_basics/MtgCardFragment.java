@@ -1,7 +1,10 @@
 package com.joshuahalvorson.android_fragments_basics;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,18 +12,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import io.magicthegathering.javasdk.api.CardAPI;
+import io.magicthegathering.javasdk.resource.Card;
+
 
 public class MtgCardFragment extends Fragment {
-    List<MtgCard> mtgCards;
-
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+
+    private static List<String> filter = new ArrayList<>();
+    public static String page = "page=%s";
+    public static String pageSize = "pageSize=%s";
+    private static final String STARTING_PAGE = "1";
+    private static final String ITEMS_PER_PAGE = "50";
+    static List<Card> mtgCards;
+    public static MtgCardRecyclerViewAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -42,7 +55,6 @@ public class MtgCardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mtgCards = new ArrayList<>();
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -52,7 +64,9 @@ public class MtgCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mtgcard_list, container, false);
-
+        filter.add(String.format(page, STARTING_PAGE));
+        filter.add(String.format(pageSize, ITEMS_PER_PAGE));
+        mtgCards = new ArrayList<>();
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -62,11 +76,44 @@ public class MtgCardFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyMtgCardRecyclerViewAdapter(mtgCards, mListener));
+            adapter = new MtgCardRecyclerViewAdapter(getActivity(), mtgCards, mListener);
+            recyclerView.setAdapter(adapter);
         }
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Card card1 = CardAPI.getCard(1);
+                Card card2 = CardAPI.getCard(2);
+                Card card3 = CardAPI.getCard(3);
+                Card card4 = CardAPI.getCard(4);
+                Card card5 = CardAPI.getCard(5);
+                Card card6 = CardAPI.getCard(6);
+                mtgCards.add(card1);
+                mtgCards.add(card2);
+                mtgCards.add(card3);
+                mtgCards.add(card4);
+                mtgCards.add(card5);
+                mtgCards.add(card6);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        }).start();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -97,6 +144,6 @@ public class MtgCardFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(MtgCard item);
+        void onListFragmentInteraction(Card item);
     }
 }

@@ -1,21 +1,29 @@
 package com.joshuahalvorson.android_fragments_basics;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.joshuahalvorson.android_fragments_basics.MtgCardFragment.OnListFragmentInteractionListener;
 import java.util.List;
 
+import io.magicthegathering.javasdk.resource.Card;
 
-public class MyMtgCardRecyclerViewAdapter extends RecyclerView.Adapter<MyMtgCardRecyclerViewAdapter.ViewHolder> {
 
-    private final List<MtgCard> mValues;
+public class MtgCardRecyclerViewAdapter extends RecyclerView.Adapter<MtgCardRecyclerViewAdapter.ViewHolder> {
+
+    private final List<Card> mValues;
     private final OnListFragmentInteractionListener mListener;
+    Activity activity;
 
-    public MyMtgCardRecyclerViewAdapter(List<MtgCard> mtgCards, OnListFragmentInteractionListener listener) {
+    public MtgCardRecyclerViewAdapter(Activity activity, List<Card> mtgCards, OnListFragmentInteractionListener listener) {
+        this.activity = activity;
         mValues = mtgCards;
         mListener = listener;
     }
@@ -30,9 +38,13 @@ public class MyMtgCardRecyclerViewAdapter extends RecyclerView.Adapter<MyMtgCard
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        //set image
-        //holder.cardImage.setText(mValues.get(position).id);
-        holder.cardContent.setText(mValues.get(position).getText());
+        Glide
+                .with(activity.getApplicationContext())
+                .load(mValues.get(position).getImageUrl())
+                .thumbnail(.5f)
+                .into(holder.image);
+
+        holder.author.setText(mValues.get(position).getName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,20 +65,20 @@ public class MyMtgCardRecyclerViewAdapter extends RecyclerView.Adapter<MyMtgCard
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final ImageView cardImage;
-        public final TextView cardContent;
-        public MtgCard mItem;
+        public final ImageView image;
+        public final TextView author;
+        public Card mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            cardImage = view.findViewById(R.id.card_image);
-            cardContent = view.findViewById(R.id.card_content);
+            image = view.findViewById(R.id.image);
+            author = view.findViewById(R.id.content);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + cardContent.getText() + "'";
+            return super.toString() + " '" + author.getText() + "'";
         }
     }
 }
