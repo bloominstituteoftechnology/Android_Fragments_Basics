@@ -40,7 +40,7 @@ public class FlashCard implements Serializable {
         this.time = time;
     }
 
-    public boolean isUserAnswerCorrect() {
+    public boolean getUserAnswerCorrect() {
         return userAnswerCorrect;
     }
 
