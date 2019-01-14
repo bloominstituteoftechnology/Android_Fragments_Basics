@@ -37,6 +37,10 @@ public class MyPersonRecyclerViewAdapter extends RecyclerView.Adapter<MyPersonRe
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getFirstName());
         holder.mContentView.setText(mValues.get(position).getLastName());
+        holder.personFirst.setText(mValues.get(position).getFirstName());
+        holder.personLast.setText(mValues.get(position).getLastName());
+        holder.personEmail.setText(mValues.get(position).getEmail());
+        holder.personPhone.setText(mValues.get(position).getPhone());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +63,10 @@ public class MyPersonRecyclerViewAdapter extends RecyclerView.Adapter<MyPersonRe
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
+        public TextView personFirst;
+        public TextView personLast;
+        public TextView personEmail;
+        public TextView personPhone;
         public Person mItem;
 
         public ViewHolder(View view) {
@@ -66,6 +74,10 @@ public class MyPersonRecyclerViewAdapter extends RecyclerView.Adapter<MyPersonRe
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.item_number);
             mContentView = (TextView) view.findViewById(R.id.content);
+            personFirst = view.findViewById(R.id.personFirst);
+            personLast = view.findViewById(R.id.personLast);
+            personEmail = view.findViewById(R.id.personEmail);
+            personPhone = view.findViewById(R.id.personPhone);
         }
 
         @Override
