@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PersonFragment.OnListFragmentInteractionListener {
 
     ArrayList<Person> list;
 
@@ -23,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
         list.add(new Person("Kobe", "Jordan", "txf.com","8709870000",6));
         list.add(new Person("Rick", "Wrestler", "txj.com","8709870000",7));
         list.add(new Person("Cherry", "Orange", "txb.com","8709870000",8));
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(Person item) {
 
     }
 }

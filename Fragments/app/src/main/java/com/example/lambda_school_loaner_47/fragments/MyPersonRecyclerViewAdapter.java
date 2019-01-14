@@ -35,8 +35,6 @@ public class MyPersonRecyclerViewAdapter extends RecyclerView.Adapter<MyPersonRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getFirstName());
-        holder.mContentView.setText(mValues.get(position).getLastName());
         holder.personFirst.setText(mValues.get(position).getFirstName());
         holder.personLast.setText(mValues.get(position).getLastName());
         holder.personEmail.setText(mValues.get(position).getEmail());
@@ -61,7 +59,6 @@ public class MyPersonRecyclerViewAdapter extends RecyclerView.Adapter<MyPersonRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
         public final TextView mContentView;
         public TextView personFirst;
         public TextView personLast;
@@ -72,7 +69,6 @@ public class MyPersonRecyclerViewAdapter extends RecyclerView.Adapter<MyPersonRe
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
             mContentView = (TextView) view.findViewById(R.id.content);
             personFirst = view.findViewById(R.id.personFirst);
             personLast = view.findViewById(R.id.personLast);
