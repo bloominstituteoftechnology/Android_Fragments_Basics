@@ -1,5 +1,7 @@
 package com.example.lambda_school_loaner_47.fragments;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +13,14 @@ public class MainActivity extends AppCompatActivity implements PersonFragment.On
 
     public static final String PERSON_ITEM = "person_item";
     ArrayList<Person> list;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         list = new ArrayList<>();
+        context = this;
 
         list.add(new Person("John", "Brown", "txy.com","8709876543", 1));
         list.add(new Person("Jerry", "Chris", "txz.com","8709870000", 2));
@@ -35,9 +39,16 @@ public class MainActivity extends AppCompatActivity implements PersonFragment.On
         Bundle args = new Bundle();
         args.putSerializable(PERSON_ITEM, item);
 
-        DetailsFragment fragment = DetailsFragment.newInstance(item);
-        fragment.setArguments(args);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+        if (getResources().getBoolean(R.bool.is_tablet)){
+            DetailsFragment fragment = DetailsFragment.newInstance(item);
+            fragment.setArguments(args);
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+        }else {
+            Intent intent = new Intent(context, PhoneActivity.class);
+            intent.putExtra(PERSON_ITEM, item);
+            startActivity(intent);
+        }
+
     }
 
     @Override
