@@ -8,7 +8,7 @@ public class FlashCard implements Serializable {
     private int time;
     private boolean userAnswerCorrect;
 
-    public FlashCard(int multiplicand, int multiplier) {
+    public FlashCard(int multiplier, int multiplicand) {
         this.multiplicand = multiplicand;
         this.multiplier = multiplier;
         this.time = 0;

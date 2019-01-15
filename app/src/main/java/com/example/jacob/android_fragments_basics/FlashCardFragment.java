@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.jacob.android_fragments_basics.dummy.DummyContent;
 import com.example.jacob.android_fragments_basics.dummy.DummyContent.DummyItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class FlashCardFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    ArrayList<FlashCard> cards;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -52,7 +54,11 @@ public class FlashCardFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            int multiplier = getArguments().getInt(MainActivity.MULTIPLIER_KEY);
+            cards = new ArrayList<>();
+            cards = FlashCardsDao.generateFlashCards(multiplier);
         }
+
     }
 
     @Override
@@ -69,7 +75,7 @@ public class FlashCardFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new FlashCardRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new FlashCardRecyclerViewAdapter(cards, mListener));
         }
         return view;
     }

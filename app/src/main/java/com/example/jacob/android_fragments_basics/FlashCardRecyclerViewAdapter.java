@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.jacob.android_fragments_basics.FlashCardFragment.OnListFragmentInteractionListener;
 import com.example.jacob.android_fragments_basics.dummy.DummyContent.DummyItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,10 +19,10 @@ import java.util.List;
  */
 public class FlashCardRecyclerViewAdapter extends RecyclerView.Adapter<FlashCardRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final ArrayList<FlashCard> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public FlashCardRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public FlashCardRecyclerViewAdapter(ArrayList<FlashCard> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -36,8 +37,10 @@ public class FlashCardRecyclerViewAdapter extends RecyclerView.Adapter<FlashCard
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+//        int product = mValues.get(position).getMultiplier() * mValues.get(position).getMultiplicand();
+        String display = String.format("%s x %s =", String.valueOf(mValues.get(position).getMultiplier()), String.valueOf(mValues.get(position).getMultiplicand()));
+        holder.mIdView.setText(display);
+//        holder.mContentView.setText(String.valueOf(mValues.get(position).getMultiplicand()));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +48,8 @@ public class FlashCardRecyclerViewAdapter extends RecyclerView.Adapter<FlashCard
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    //TODO uncomment out line below and follow it.
+//                    mListener.onListFragmentInteraction(holder.mItem);
                 }
             }
         });
@@ -60,7 +64,7 @@ public class FlashCardRecyclerViewAdapter extends RecyclerView.Adapter<FlashCard
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public FlashCard mItem;
 
         public ViewHolder(View view) {
             super(view);
