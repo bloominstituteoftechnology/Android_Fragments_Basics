@@ -1,6 +1,8 @@
 package com.example.jacob.android_fragments_basics;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,25 +15,29 @@ public class MainActivity extends AppCompatActivity implements FlashCardFragment
 
     public static final String MULTIPLIER_KEY = "multiplier";
     public static final String SELECTION_KEY = "selection_key";
+    Activity activity;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        activity = this;
+        context = this;
+
         findViewById(R.id.button_go).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (Fragment f:getSupportFragmentManager().getFragments()) {
-                    getSupportFragmentManager().beginTransaction().remove(f);
+                hideKeyboard(activity);
+                for (Fragment f : getSupportFragmentManager().getFragments()) {
+                    getSupportFragmentManager().beginTransaction().remove(f).commit();
                 }
-
                 Bundle bundle = new Bundle();
                 bundle.putInt(MULTIPLIER_KEY, Integer.parseInt(((EditText) findViewById(R.id.edit_multiplier)).getText().toString()));
                 FlashCardFragment fragment = new FlashCardFragment();
                 fragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder_list, fragment).commit();
-
             }
         });
 
@@ -40,12 +46,17 @@ public class MainActivity extends AppCompatActivity implements FlashCardFragment
 
     @Override
     public void onListFragmentInteraction(FlashCard item) {
-        hideKeyboard(this);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(SELECTION_KEY, item);
-        DetailsFragment fragment = new DetailsFragment();
-        fragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder_details, fragment).commit();
+        if (getResources().getBoolean(R.bool.is_tablet)) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(SELECTION_KEY, item);
+            DetailsFragment fragment = new DetailsFragment();
+            fragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder_details, fragment).commit();
+        } else {
+            Intent intent = new Intent(context, PhoneActivity.class);
+            intent.putExtra(SELECTION_KEY, item);
+            startActivity(intent);
+        }
     }
 
     @Override
