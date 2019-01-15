@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements PersonFragment.On
         Bundle args = new Bundle();
         args.putSerializable(PERSON_ITEM, item);
 
-        Fragment fragment = new DetailsFragment();
+        DetailsFragment fragment = DetailsFragment.newInstance(item);
         fragment.setArguments(args);
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
     }
