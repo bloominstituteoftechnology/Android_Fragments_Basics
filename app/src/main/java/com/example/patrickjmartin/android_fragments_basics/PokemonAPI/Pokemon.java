@@ -7,9 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pokemon implements Parcelable {
+public class Pokemon implements Serializable {
 
 
     private String name, spriteURL, type1, type2;
@@ -27,7 +28,7 @@ public class Pokemon implements Parcelable {
 
     }
 
-    public Pokemon(JSONObject caught){
+    public Pokemon(JSONObject caught) {
         JSONObject temp;
         JSONArray tempAry;
         this.moves = new ArrayList<String>();
@@ -35,7 +36,7 @@ public class Pokemon implements Parcelable {
 
         try {
             raw = caught.getString("name");
-            this.name = raw.substring(0,1).toUpperCase() + raw.substring(1);
+            this.name = raw.substring(0, 1).toUpperCase() + raw.substring(1);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -52,11 +53,11 @@ public class Pokemon implements Parcelable {
             raw = tempAry.getJSONObject(0)
                     .getJSONObject("type")
                     .getString("name");
-            this.type2 = raw.substring(0,1).toUpperCase() + raw.substring(1);
+            this.type2 = raw.substring(0, 1).toUpperCase() + raw.substring(1);
             raw = tempAry.getJSONObject(1)
                     .getJSONObject("type")
                     .getString("name");
-            this.type1 = raw.substring(0,1).toUpperCase() + raw.substring(1);
+            this.type1 = raw.substring(0, 1).toUpperCase() + raw.substring(1);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -110,39 +111,4 @@ public class Pokemon implements Parcelable {
         return moves;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(spriteURL);
-        dest.writeString(type1);
-        dest.writeString(type2);
-        dest.writeInt(ID);
-        dest.writeSerializable(moves);
-    }
-
-    protected Pokemon(Parcel in) {
-        name = in.readString();
-        spriteURL = in.readString();
-        type1 = in.readString();
-        type2 = in.readString();
-        ID = in.readInt();
-        moves = (ArrayList<String>) in.readSerializable();
-    }
-
-    public static final Creator<Pokemon> CREATOR = new Creator<Pokemon>() {
-        @Override
-        public Pokemon createFromParcel(Parcel source) {
-            return new Pokemon(source);
-        }
-
-        @Override
-        public Pokemon[] newArray(int size) {
-            return new Pokemon[size];
-        }
-    };
 }

@@ -68,18 +68,16 @@ public class PokemonFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final Pokemon pokemon1 = PokemonDAO.getPokemon(25);
-                final Pokemon pokemon2 = PokemonDAO.getPokemon(50);
-                final Pokemon pokemon3 = PokemonDAO.getPokemon(75);
-                final Pokemon pokemon4 = PokemonDAO.getPokemon(100);
-                final Pokemon pokemon5 = PokemonDAO.getPokemon(150);
-                final Pokemon pokemon6 = PokemonDAO.getPokemon(200);
-                final Pokemon pokemon7 = PokemonDAO.getPokemon(250);
-                final Pokemon pokemon8 = PokemonDAO.getPokemon(300);
-                final Pokemon pokemon9 = PokemonDAO.getPokemon(400);
-                final Pokemon pokemon10 = PokemonDAO.getPokemon(500);
-                final Pokemon pokemon11 = PokemonDAO.getPokemon(600);
-                final Pokemon pokemon12 = PokemonDAO.getPokemon(700);
+                final Pokemon pokemon1 = PokemonDAO.getPokemon(133);
+                final Pokemon pokemon2 = PokemonDAO.getPokemon(134);
+                final Pokemon pokemon3 = PokemonDAO.getPokemon(135);
+                final Pokemon pokemon4 = PokemonDAO.getPokemon(136);
+                final Pokemon pokemon5 = PokemonDAO.getPokemon(197);
+                final Pokemon pokemon6 = PokemonDAO.getPokemon(471);
+                final Pokemon pokemon7 = PokemonDAO.getPokemon(470);
+                final Pokemon pokemon8 = PokemonDAO.getPokemon(196);
+                final Pokemon pokemon9 = PokemonDAO.getPokemon(700);
+
 
                 pokemonArrayList.add(pokemon1);
                 pokemonArrayList.add(pokemon2);
@@ -90,9 +88,7 @@ public class PokemonFragment extends Fragment {
                 pokemonArrayList.add(pokemon7);
                 pokemonArrayList.add(pokemon8);
                 pokemonArrayList.add(pokemon9);
-                pokemonArrayList.add(pokemon10);
-                pokemonArrayList.add(pokemon11);
-                pokemonArrayList.add(pokemon12);
+
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

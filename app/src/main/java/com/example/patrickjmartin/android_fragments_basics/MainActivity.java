@@ -1,5 +1,6 @@
 package com.example.patrickjmartin.android_fragments_basics;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -20,7 +21,17 @@ public class MainActivity extends AppCompatActivity implements PokemonFragment.O
     @Override
     public void onListFragmentInteraction(Pokemon item) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable("pokemon", item);
+        bundle.putSerializable("pokemon", item);
+
+        if(getResources().getBoolean(R.bool.is_tablet)) {
+            final DetailsFragment detailsFragment = DetailsFragment.newInstance(item);
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.fragment_holder_detail, detailsFragment).commit();
+        } else {
+            Intent intent = new Intent(getApplicationContext(), PhoneDetailActivity.class);
+            intent.putExtra("pokemon", item);
+            startActivity(intent);
+        }
 
 
     }
