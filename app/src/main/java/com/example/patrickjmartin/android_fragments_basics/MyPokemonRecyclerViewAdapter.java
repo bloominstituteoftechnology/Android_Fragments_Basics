@@ -1,16 +1,28 @@
 package com.example.patrickjmartin.android_fragments_basics;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.patrickjmartin.android_fragments_basics.PokemonAPI.NetworkAdapter;
 import com.example.patrickjmartin.android_fragments_basics.PokemonAPI.Pokemon;
 import com.example.patrickjmartin.android_fragments_basics.PokemonFragment.OnListFragmentInteractionListener;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.ref.WeakReference;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +31,7 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     private final ArrayList<Pokemon> mValues;
     private final OnListFragmentInteractionListener mListener;
     Activity activity;
+    private Bitmap bitmap;
 
     public MyPokemonRecyclerViewAdapter(Activity activity, ArrayList<Pokemon> items, OnListFragmentInteractionListener listener) {
         this.activity =  activity;
@@ -36,8 +49,9 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getID());
-        holder.mContentView.setText(mValues.get(position).getName());
+        holder.mIdView.setText(holder.mItem.getName());
+
+        new DownloadImageTask(holder.mContentView).execute(holder.mItem.getSpriteURL());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,19 +73,70 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mIdView;
-        public final TextView mContentView;
+        public final ImageView mContentView;
         public Pokemon mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mIdView = view.findViewById(R.id.content);
+            mContentView = view.findViewById(R.id.pokemon_image);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mIdView.getText() + "'";
         }
     }
+
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        private final WeakReference<ImageView> imageViewWeakReference;
+        ProgressBar progressBar;
+
+
+        public DownloadImageTask(ImageView bookImageView) {
+            this.imageViewWeakReference = new WeakReference<>(bookImageView);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            String url = strings[0];
+            Bitmap image;
+            InputStream in;
+            try {
+                URL imageURL = new URL(url);
+                HttpURLConnection connection = (HttpURLConnection) imageURL.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+
+
+                in = connection.getInputStream();
+                image = BitmapFactory.decodeStream(in);
+                in.close();
+                return image;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return  null;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            ImageView imageView = imageViewWeakReference.get();
+            imageView.setImageBitmap(bitmap);
+
+
+        }
+    }
+
+
 }

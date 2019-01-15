@@ -1,7 +1,10 @@
 package com.example.patrickjmartin.android_fragments_basics;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.patrickjmartin.android_fragments_basics.PokemonAPI.Pokemon;
+import com.example.patrickjmartin.android_fragments_basics.PokemonAPI.PokemonDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +32,8 @@ public class PokemonFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-
     static ArrayList<Pokemon> pokemonArrayList;
+    public static MyPokemonRecyclerViewAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -58,9 +62,54 @@ public class PokemonFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final Pokemon pokemon1 = PokemonDAO.getPokemon(25);
+                final Pokemon pokemon2 = PokemonDAO.getPokemon(50);
+                final Pokemon pokemon3 = PokemonDAO.getPokemon(75);
+                final Pokemon pokemon4 = PokemonDAO.getPokemon(100);
+                final Pokemon pokemon5 = PokemonDAO.getPokemon(150);
+                final Pokemon pokemon6 = PokemonDAO.getPokemon(200);
+                final Pokemon pokemon7 = PokemonDAO.getPokemon(250);
+                final Pokemon pokemon8 = PokemonDAO.getPokemon(300);
+                final Pokemon pokemon9 = PokemonDAO.getPokemon(400);
+                final Pokemon pokemon10 = PokemonDAO.getPokemon(500);
+                final Pokemon pokemon11 = PokemonDAO.getPokemon(600);
+                final Pokemon pokemon12 = PokemonDAO.getPokemon(700);
+
+                pokemonArrayList.add(pokemon1);
+                pokemonArrayList.add(pokemon2);
+                pokemonArrayList.add(pokemon3);
+                pokemonArrayList.add(pokemon4);
+                pokemonArrayList.add(pokemon5);
+                pokemonArrayList.add(pokemon6);
+                pokemonArrayList.add(pokemon7);
+                pokemonArrayList.add(pokemon8);
+                pokemonArrayList.add(pokemon9);
+                pokemonArrayList.add(pokemon10);
+                pokemonArrayList.add(pokemon11);
+                pokemonArrayList.add(pokemon12);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        }).start();
+
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
+        pokemonArrayList = new ArrayList<Pokemon>();
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -72,11 +121,18 @@ public class PokemonFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            recyclerView.setAdapter(new MyPokemonRecyclerViewAdapter(getActivity(), pokemonArrayList, mListener));
+            adapter = new MyPokemonRecyclerViewAdapter(getActivity(), pokemonArrayList, mListener);
+            recyclerView.setAdapter(adapter);
+
+
         }
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
     @Override
     public void onAttach(Context context) {

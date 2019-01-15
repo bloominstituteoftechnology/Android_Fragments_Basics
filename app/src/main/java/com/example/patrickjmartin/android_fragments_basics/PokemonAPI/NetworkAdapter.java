@@ -1,97 +1,88 @@
 package com.example.patrickjmartin.android_fragments_basics.PokemonAPI;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NetworkAdapter {
-    public interface NetworkCallback {
-        void returnResult(Boolean success, String result);
-    }
+    public static final String GET = "GET";
+    public static final String POST = "POST";
+    public static final String PUT = "PUT";
+    public static final String DELETE = "DELETE";
+    public static final int TIMEOUT = 3000;
 
+    public static String httpRequest(String stringUrl, String requestType){
+        String result = "";
+        InputStream stream = null;
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(stringUrl);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setReadTimeout(TIMEOUT);
+            connection.setConnectTimeout(TIMEOUT);
+            connection.setRequestMethod(requestType);
 
-    public static void httpGetRequest(final String urlString, final NetworkCallback callback) {
-        new Thread(() -> {
-            String result = "";
-            boolean success = false;
-            HttpURLConnection connection = null;
-            InputStream stream = null;
-            try {
-                URL url = new URL(urlString);
-                connection = (HttpURLConnection) url.openConnection();
+            if(requestType.equals(GET)) {
                 connection.connect();
-                int responseCode = connection.getResponseCode();
-                if(responseCode == HttpURLConnection.HTTP_OK) {
-                    stream = connection.getInputStream();
-                    if(stream != null) {
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-                        StringBuilder builder = new StringBuilder();
-                        String line = reader.readLine();
-                        while(line != null){
-                            builder.append(line);
-                            line = reader.readLine();
-                        }
-                        result = builder.toString();
-                        success = true;
-                    }
-                } else {
-                    result = String.valueOf(responseCode);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if(connection != null) {
-                    connection.disconnect();
-                }
-
-                if(stream != null) {
-                    try {
-                        stream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                callback.returnResult(success, result);
             }
-        }).start();
+
+
+            if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+                stream = connection.getInputStream();
+                if(stream != null){
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while((line = reader.readLine()) != null){
+                        sb.append(line);
+                    }
+                    result = sb.toString();
+                }
+            }
+
+        }catch (MalformedURLException e) {
+            e.printStackTrace();
+            result = e.getMessage();
+        }catch (IOException e) {
+            e.printStackTrace();
+            result = e.getMessage();
+        }finally {
+            if(connection != null){
+                connection.disconnect();
+            }
+            if(stream != null){
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+
     }
 
-    public static Bitmap httpImageRequest(String urlString, String cacheKey , final AtomicBoolean cancelled) {
-
-        if(cancelled.get()) {
-            Log.i("NetworkAdapter Class - httpImageRequest has been Cancelled:\n", urlString);
-            return null;
-        }
-
+    public static Bitmap httpImageRequest(String urlString){
         Bitmap image = null;
         InputStream stream = null;
         HttpURLConnection connection = null;
         try{
             URL url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
-
-            if(cancelled.get()) {
-                throw new IOException();
-            }
-
+            connection.setReadTimeout(TIMEOUT);
+            connection.setConnectTimeout(TIMEOUT);
             connection.connect();
-
             int responseCode = connection.getResponseCode();
-
             if(responseCode == HttpURLConnection.HTTP_OK){
-
-                if(cancelled.get()){
-                    Log.i("ImageRequestCanceled", urlString);
-                    throw new IOException();
-                }
-
                 stream = connection.getInputStream();
                 if(stream != null){
                     image = BitmapFactory.decodeStream(stream);
@@ -113,16 +104,10 @@ public class NetworkAdapter {
                 connection.disconnect();
             }
         }
-
-
-//        ContactImageCache imageCache = ContactImageCache.getINSTANCE();
-//
-//        if(urlString.contains("thumb")) {
-//            imageCache.setObject(cacheKey, image);
-//        }
-
         return image;
     }
 
-}
 
+
+
+}

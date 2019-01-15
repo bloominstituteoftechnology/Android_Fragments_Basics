@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".PokemonFragment"
-    tools:listitem="@layout/fragment_pokemon" />
+    tools:listitem="@layout/fragment_pokemon"/>

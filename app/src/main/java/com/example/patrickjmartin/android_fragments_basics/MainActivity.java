@@ -13,11 +13,15 @@ public class MainActivity extends AppCompatActivity implements PokemonFragment.O
         setContentView(R.layout.activity_main);
 
         PokemonFragment fragment = new PokemonFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder, fragment).commit();
 
     }
 
     @Override
     public void onListFragmentInteraction(Pokemon item) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("pokemon", item);
+
 
     }
 
