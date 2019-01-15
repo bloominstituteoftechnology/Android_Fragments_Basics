@@ -16,7 +16,6 @@ public class PhoneActivity extends AppCompatActivity implements DetailsFragment.
 
     }
 
-
     @Override
     public void onFragmentInteraction(Uri uri) {
 

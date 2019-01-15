@@ -3,6 +3,8 @@ package com.example.jacob.android_fragments_basics;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,14 +23,6 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class DetailsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-//    private FlashCard mParam1;
-//    private String mParam2;
 
     private FlashCard card;
 
@@ -42,17 +36,13 @@ public class DetailsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment DetailsFragment.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static DetailsFragment newInstance(FlashCard flashCard) {
         DetailsFragment fragment = new DetailsFragment();
         Bundle args = new Bundle();
         args.putSerializable(MainActivity.SELECTION_KEY, flashCard);
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,8 +52,6 @@ public class DetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             card = ((FlashCard) getArguments().getSerializable(MainActivity.SELECTION_KEY));
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -79,7 +67,24 @@ public class DetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ((TextView) view.findViewById(R.id.details_multiplicand)).setText(String.valueOf(card.getMultiplicand()));
         ((TextView) view.findViewById(R.id.details_multiplier)).setText(String.valueOf(card.getMultiplier()));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((TextView) getView().findViewById(R.id.text_answer)).setText(String.valueOf(card.getMultiplier() * card.getMultiplicand()));
 
+                    }
+                });
+
+            }
+        }).start();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

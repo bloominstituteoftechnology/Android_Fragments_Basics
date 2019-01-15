@@ -11,7 +11,7 @@ import com.example.jacob.android_fragments_basics.FlashCardFragment.OnListFragme
 import java.util.ArrayList;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link FlashCard} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
@@ -35,11 +35,8 @@ public class FlashCardRecyclerViewAdapter extends RecyclerView.Adapter<FlashCard
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-//        int product = mValues.get(position).getMultiplier() * mValues.get(position).getMultiplicand();
         String display = String.format("%s x %s =", String.valueOf(mValues.get(position).getMultiplier()), String.valueOf(mValues.get(position).getMultiplicand()));
         holder.mIdView.setText(display);
-//        holder.mContentView.setText(String.valueOf(mValues.get(position).getMultiplicand()));
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
