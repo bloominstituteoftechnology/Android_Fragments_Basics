@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Android_Fragments_Basics</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="title_activity_phone_detail">PhoneDetail</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
