@@ -53,11 +53,11 @@ public class Pokemon implements Serializable {
             raw = tempAry.getJSONObject(0)
                     .getJSONObject("type")
                     .getString("name");
-            this.type2 = raw.substring(0, 1).toUpperCase() + raw.substring(1);
+            this.type1 = raw.substring(0, 1).toUpperCase() + raw.substring(1);
             raw = tempAry.getJSONObject(1)
                     .getJSONObject("type")
                     .getString("name");
-            this.type1 = raw.substring(0, 1).toUpperCase() + raw.substring(1);
+            this.type2 = raw.substring(0, 1).toUpperCase() + raw.substring(1);
         } catch (JSONException e) {
             e.printStackTrace();
         }
