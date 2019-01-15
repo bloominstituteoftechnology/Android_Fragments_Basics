@@ -27,7 +27,7 @@ public class Pokemon implements Serializable {
     public Pokemon(JSONObject caught){
         JSONObject temp;
         JSONArray tempAry;
-        
+
 
     }
 
