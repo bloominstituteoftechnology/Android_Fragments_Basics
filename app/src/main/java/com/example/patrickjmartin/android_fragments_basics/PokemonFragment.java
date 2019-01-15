@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.patrickjmartin.android_fragments_basics.PokemonAPI.Pokemon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +28,8 @@ public class PokemonFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+
+    static ArrayList<Pokemon> pokemonArrayList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -68,7 +71,8 @@ public class PokemonFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyPokemonRecyclerViewAdapter(Pokemon.ITEMS, mListener));
+
+            recyclerView.setAdapter(new MyPokemonRecyclerViewAdapter(getActivity(), pokemonArrayList, mListener));
         }
         return view;
     }

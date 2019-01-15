@@ -1,5 +1,6 @@
 package com.example.patrickjmartin.android_fragments_basics;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +11,17 @@ import com.example.patrickjmartin.android_fragments_basics.PokemonAPI.Pokemon;
 import com.example.patrickjmartin.android_fragments_basics.PokemonFragment.OnListFragmentInteractionListener;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemonRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Pokemon> mValues;
+    private final ArrayList<Pokemon> mValues;
     private final OnListFragmentInteractionListener mListener;
+    Activity activity;
 
-    public MyPokemonRecyclerViewAdapter(List<Pokemon> items, OnListFragmentInteractionListener listener) {
+    public MyPokemonRecyclerViewAdapter(Activity activity, ArrayList<Pokemon> items, OnListFragmentInteractionListener listener) {
+        this.activity =  activity;
         mValues = items;
         mListener = listener;
     }

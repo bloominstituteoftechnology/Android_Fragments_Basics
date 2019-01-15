@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android_Fragments_Basics</string>
+    <string name="placeholder">Placeholder</string>
 </resources>

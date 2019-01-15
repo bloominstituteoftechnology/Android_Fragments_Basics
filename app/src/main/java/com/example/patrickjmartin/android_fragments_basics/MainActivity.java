@@ -11,6 +11,9 @@ public class MainActivity extends AppCompatActivity implements PokemonFragment.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PokemonFragment fragment = new PokemonFragment();
+
     }
 
     @Override
@@ -18,8 +21,5 @@ public class MainActivity extends AppCompatActivity implements PokemonFragment.O
 
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
 
-    }
 }
