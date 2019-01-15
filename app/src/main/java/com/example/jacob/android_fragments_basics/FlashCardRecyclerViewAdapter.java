@@ -49,7 +49,7 @@ public class FlashCardRecyclerViewAdapter extends RecyclerView.Adapter<FlashCard
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     //TODO uncomment out line below and follow it.
-//                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onListFragmentInteraction(holder.mItem);
                 }
             }
         });

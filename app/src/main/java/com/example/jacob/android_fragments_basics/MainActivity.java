@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.jacob.android_fragments_basics.dummy.DummyContent;
-
 public class MainActivity extends AppCompatActivity implements FlashCardFragment.OnListFragmentInteractionListener {
 
     public static final String MULTIPLIER_KEY = "multiplier";
@@ -23,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements FlashCardFragment
                 bundle.putInt(MULTIPLIER_KEY, Integer.parseInt(((EditText) findViewById(R.id.edit_multiplier)).getText().toString()));
                 FlashCardFragment fragment = new FlashCardFragment();
                 fragment.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, fragment).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder_list, fragment).commit();
             }
         });
 
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements FlashCardFragment
 
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(FlashCard item) {
 
     }
 }
