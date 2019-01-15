@@ -1,4 +1,4 @@
-package com.example.patrickjmartin.android_fragments_basics;
+package com.example.patrickjmartin.android_fragments_basics.PokemonAPI;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;

@@ -1,4 +1,4 @@
-package com.example.patrickjmartin.android_fragments_basics;
+package com.example.patrickjmartin.android_fragments_basics.PokemonAPI;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -11,8 +11,9 @@ import java.util.ArrayList;
 
 public class Pokemon implements Parcelable {
 
+    private static String BASE_IMAGE_URL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
-    private String name, spriteURL, type1, type2;
+    private String name, spriteURL, type1, type2, apiURL;
     private int ID;
     private ArrayList<String> moves;
     private boolean isSaved;
