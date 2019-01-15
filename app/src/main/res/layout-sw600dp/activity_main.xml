@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@id/button_go" />
 
     <FrameLayout
-        android:id="@+id/fragment_holder_single"
+        android:id="@+id/fragment_holder_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
