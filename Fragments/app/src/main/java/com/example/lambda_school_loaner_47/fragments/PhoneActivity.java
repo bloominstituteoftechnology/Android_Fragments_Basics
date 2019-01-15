@@ -5,18 +5,19 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class PhoneActivity extends AppCompatActivity {
+public class PhoneActivity extends AppCompatActivity implements DetailsFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone);
 
-        Bundle args = new Bundle();
-       // args.putSerializable(MainActivity.PERSON_ITEM, item);
+        DetailsFragment fragment = DetailsFragment.newInstance((Person) getIntent().getSerializableExtra(MainActivity.PERSON_ITEM));
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+    }
 
-        /*DetailsFragment fragment = DetailsFragment.newInstance();
-        fragment.setArguments(args);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();*/
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
