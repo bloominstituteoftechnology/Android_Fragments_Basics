@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Comic {
+import java.io.Serializable;
+
+public class Comic  implements Serializable {
     private String transcript, title, safe_title, news, alt, link, img, month, year, day;
     private int num;
     private Bitmap bitMap;
