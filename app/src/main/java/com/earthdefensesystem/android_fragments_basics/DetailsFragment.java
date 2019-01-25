@@ -88,7 +88,7 @@ public class DetailsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+    public static class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         private final WeakReference<ImageView> imageViewWeakReference;
 
 
