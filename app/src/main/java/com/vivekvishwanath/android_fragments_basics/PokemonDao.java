@@ -7,13 +7,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PokemonDao {
 
     private static final String BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 
-    public static ArrayList<Pokemon> getAllPokemon() {
-        ArrayList<Pokemon> pokemonList = new ArrayList<>();
+    public static final List<Pokemon> pokemonList = new ArrayList<>();
+
+    public static List<Pokemon> getAllPokemon() {
         String result = NetworkAdapter.httpGETRequest(BASE_URL);
         try {
             JSONObject allPokemonJson = new JSONObject(result);
