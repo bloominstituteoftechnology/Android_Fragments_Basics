@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity implements AppListingFragment.OnListFragmentInteractionListener{
 
+    public static final String APP_KEY = "App";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,16 @@ public class MainActivity extends AppCompatActivity implements AppListingFragmen
 
     @Override
     public void onListFragmentInteraction(AppListing item) {
+        AppItemFragment fragment = new AppItemFragment();
 
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(APP_KEY, item);
+        fragment.setArguments(bundle);
+
+        if(getResources().getBoolean(R.bool.is_tablet)){
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_details, fragment).addToBackStack(null).commit();
+        }else{
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).addToBackStack(null).commit();
+        }
     }
 }

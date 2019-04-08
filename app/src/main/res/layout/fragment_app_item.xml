@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:orientation="vertical"
+    android:clickable="true"
+    tools:context=".AppItemFragment">
+
+    <TextView
+        android:id="@+id/text_app_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="App Name"
+        android:textAlignment="center"
+        android:textSize="32sp" />
+
+    <TextView
+        android:id="@+id/text_app_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="v1.0.2"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/text_app_domain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="https://thisisanapp.com/getdomainname"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_app_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact: joey@genericemailaddress.com" />
+
+    <ImageView
+        android:id="@+id/image_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

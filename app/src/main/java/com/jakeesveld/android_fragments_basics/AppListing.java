@@ -1,6 +1,8 @@
 package com.jakeesveld.android_fragments_basics;
 
-public class AppListing {
+import java.io.Serializable;
+
+public class AppListing implements Serializable {
 
     private int id;
     private String appName, appVersion, domainName, contactEmail, imageURL;
