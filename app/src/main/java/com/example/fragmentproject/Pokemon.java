@@ -1,8 +1,9 @@
 package com.example.fragmentproject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pokemon {
+public class Pokemon implements Serializable {
 
     private String[] elementType;
     private String imageURL;
