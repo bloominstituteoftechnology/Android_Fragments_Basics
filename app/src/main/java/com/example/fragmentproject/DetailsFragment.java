@@ -1,12 +1,22 @@
 package com.example.fragmentproject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 /**
@@ -74,6 +84,45 @@ public class DetailsFragment extends Fragment {
         }
     }
 
+   ImageView pokemonImageView;
+    TextView pokemonType1;
+    TextView pokemonType2;
+    TextView pokemonName;
+    TextView pokemonNumber;
+    LinearLayout ll;
+    Pokemon pokemon;
+
+    public TextView createTextView(String text) {
+        TextView textView = new TextView(getContext());
+        textView.setText(text);
+        return textView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+      pokemon = (Pokemon) getArguments().getSerializable(MainActivity.POKEMON_DETAILS_KEY);
+        pokemonImageView = view.findViewById(R.id.poke_image);
+
+        if(pokemon != null){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    new setImageAsync().execute();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pokemonName.setText(pokemon.getName());
+                            pokemonNumber.setText(pokemon.getNumber());
+                            pokemonType1.setText(pokemon.getElementType()[0]);
+                            pokemonType2.setText(pokemon.getElementType()[1]);
+
+                        }
+                    });
+                }
+            }).start();
+        }
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -104,5 +153,26 @@ public class DetailsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private class setImageAsync extends AsyncTask<Void, Void, Bitmap> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //TODO:PROGRESS BAR
+        }
+
+        @Override
+        protected Bitmap doInBackground(Void... params) {
+            Bitmap image = PokemonDao.bitmapFromURL(pokemon.getImageURL());
+            return image;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            super.onPostExecute(result);
+            pokemonImageView.setImageBitmap(result);
+        }
+
     }
 }

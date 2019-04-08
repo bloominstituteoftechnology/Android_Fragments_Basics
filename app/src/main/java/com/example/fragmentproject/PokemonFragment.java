@@ -2,6 +2,8 @@ package com.example.fragmentproject;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 
 /**
@@ -24,6 +28,8 @@ public class PokemonFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+
+    ArrayList<Pokemon> pokemon;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -49,6 +55,31 @@ public class PokemonFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        pokemon = new ArrayList<>();
+        final MyPokemonRecyclerViewAdapter adapter = new MyPokemonRecyclerViewAdapter(pokemon, mListener);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 1; i < 51; i++) {
+                    PokemonDao.addPokemonToRepo(PokemonDao.getPokemon(i));
+                }
+                pokemon = PokemonDao.getAllPokemon();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        }).start();
     }
 
     @Override

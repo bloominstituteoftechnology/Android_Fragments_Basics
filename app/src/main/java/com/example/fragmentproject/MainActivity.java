@@ -1,6 +1,8 @@
 package com.example.fragmentproject;
 
 import android.net.Uri;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -13,15 +15,9 @@ public class MainActivity extends AppCompatActivity implements PokemonFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 200; i++) {
-                    PokemonDao.addPokemonToRepo(PokemonDao.getPokemon(i));
-                }
-            }
-        }).start();
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, new PokemonFragment()).commit();
     }
 
 
