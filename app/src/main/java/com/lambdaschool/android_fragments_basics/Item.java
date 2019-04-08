@@ -1,11 +1,13 @@
 package com.lambdaschool.android_fragments_basics;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Item implements Serializable {
     private int itemId;
     private int itemResource;
     private String itemName;
+    public static ArrayList<Item> itemArrayList;
 
     public Item(int itemId, int itemResource, String itemName) {
         this.itemId = itemId;
