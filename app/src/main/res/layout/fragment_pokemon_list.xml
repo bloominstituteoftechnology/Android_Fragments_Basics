@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     android:name="com.example.fragmentproject.PokemonFragment"
     tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/notify_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dataSetChange"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

@@ -15,9 +15,19 @@ public class MainActivity extends AppCompatActivity implements PokemonFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, new PokemonFragment()).commit();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 1; i < 51; i++) {
+                    PokemonDao.addPokemonToRepo(PokemonDao.getPokemon(i));
+                }
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, new PokemonFragment()).commit();
+            }
+        }).start();
+
+
     }
 
 

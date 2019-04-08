@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,8 @@ public class PokemonFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
 
     ArrayList<Pokemon> pokemon;
+    TextView button;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -65,16 +69,16 @@ public class PokemonFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 1; i < 51; i++) {
-                    PokemonDao.addPokemonToRepo(PokemonDao.getPokemon(i));
-                }
-                pokemon = PokemonDao.getAllPokemon();
+                pokemon.clear();
+
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        pokemon.addAll(PokemonDao.getAllPokemon());
                         adapter.notifyDataSetChanged();
                     }
                 });
