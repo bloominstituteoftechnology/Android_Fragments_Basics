@@ -4,9 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.vivekvishwanath.android_fragments_basics.PokemonFragment.OnListFragmentInteractionListener;
+import com.vivekvishwanath.android_fragments_basics.PokemonListFragment.OnPokemonListFragmentInteractionListener;
 
 import java.util.List;
 
@@ -14,9 +15,9 @@ import java.util.List;
 public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemonRecyclerViewAdapter.ViewHolder> {
 
     private final List<Pokemon> pokemonList;
-    private final OnListFragmentInteractionListener mListener;
+    private final PokemonListFragment.OnPokemonListFragmentInteractionListener mListener;
 
-    public MyPokemonRecyclerViewAdapter(List<Pokemon> pokemonList, OnListFragmentInteractionListener listener) {
+    public MyPokemonRecyclerViewAdapter(List<Pokemon> pokemonList, OnPokemonListFragmentInteractionListener listener) {
         this.pokemonList = pokemonList;
         mListener = listener;
     }
@@ -30,17 +31,15 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.pokemon = pokemonList.get(position);
-        holder.pokemonId.setText(pokemonList.get(position).getId());
-        holder.pokemonName.setText(pokemonList.get(position).getName());
+        final Pokemon pokemon = pokemonList.get(position);
+        holder.pokemonId.setText(Integer.toString(pokemon.getId()));
+        holder.pokemonName.setText(pokemon.getName());
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.pokemon);
+                    mListener.OnPokemonListFragmentInteractionListener(pokemon);
                 }
             }
         });
@@ -52,16 +51,15 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView pokemonId;
-        public final TextView pokemonName;
-        public Pokemon pokemon;
+        private TextView pokemonId;
+        private TextView pokemonName;
+        private LinearLayout parent;
 
         public ViewHolder(View view) {
             super(view);
-            mView = view;
-            pokemonId = (TextView) view.findViewById(R.id.pokedex_id);
-            pokemonName = (TextView) view.findViewById(R.id.pokemon_name);
+            pokemonId = view.findViewById(R.id.pokedex_id);
+            pokemonName = view.findViewById(R.id.pokemon_name);
+            parent = view.findViewById(R.id.parent);
         }
 
         @Override
