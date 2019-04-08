@@ -30,17 +30,12 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        //TODO: fix this shitt
-/*        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);*/
+        holder.mIdView.setText(mValues.get(position).getName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
             }
@@ -57,19 +52,12 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
         //TODO: and fix this shitt
         public final View mView;
         public final TextView mIdView;
-        public final TextView mContentView;
         public Pokemon mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            mIdView = view.findViewById(R.id.pokemon_name);
         }
     }
 }
