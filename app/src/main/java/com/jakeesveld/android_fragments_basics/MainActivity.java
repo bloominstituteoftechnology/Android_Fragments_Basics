@@ -8,6 +8,7 @@ import android.os.Bundle;
 public class MainActivity extends AppCompatActivity implements AppListingFragment.OnListFragmentInteractionListener{
 
     public static final String APP_KEY = "App";
+    public static final String FRAGMENT_TAG = "details";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,8 @@ public class MainActivity extends AppCompatActivity implements AppListingFragmen
         if(getResources().getBoolean(R.bool.is_tablet)){
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_details, fragment).addToBackStack(null).commit();
         }else{
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).addToBackStack(null).commit();
+            fragment.show(getSupportFragmentManager(), FRAGMENT_TAG);
+           //getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).addToBackStack(null).commit();
         }
     }
 }
