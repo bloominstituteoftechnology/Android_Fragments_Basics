@@ -31,7 +31,7 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.mIdView.setText(mValues.get(position).getName());
-
+        holder.mItem = mValues.get(position);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -84,7 +86,7 @@ public class DetailsFragment extends Fragment {
         }
     }
 
-   ImageView pokemonImageView;
+    ImageView pokemonImageView;
     TextView pokemonType1;
     TextView pokemonType2;
     TextView pokemonName;
@@ -99,11 +101,11 @@ public class DetailsFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-      pokemon = (Pokemon) getArguments().getSerializable(MainActivity.POKEMON_DETAILS_KEY);
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        pokemon = (Pokemon) getArguments().getSerializable(MainActivity.POKEMON_DETAILS_KEY);
         pokemonImageView = view.findViewById(R.id.poke_image);
 
-        if(pokemon != null){
+        if (pokemon != null) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -111,11 +113,10 @@ public class DetailsFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            pokemonName.setText(pokemon.getName());
-                            pokemonNumber.setText(pokemon.getNumber());
-                            pokemonType1.setText(pokemon.getElementType()[0]);
-                            pokemonType2.setText(pokemon.getElementType()[1]);
-
+                            ((TextView)view.findViewById(R.id.poke_name)).setText(pokemon.getName());
+                            ((TextView)view.findViewById(R.id.poke_type1)).setText(pokemon.getElementType()[0]);
+                            ((TextView)view.findViewById(R.id.poke_type2)).setText(pokemon.getElementType()[1]);
+                            ((TextView)view.findViewById(R.id.poke_num)).setText(String.valueOf(pokemon.getNumber()));
                         }
                     });
                 }
