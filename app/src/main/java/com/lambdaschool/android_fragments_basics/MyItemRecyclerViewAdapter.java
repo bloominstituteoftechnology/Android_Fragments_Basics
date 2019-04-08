@@ -4,10 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.lambdaschool.android_fragments_basics.ItemFragment.OnListFragmentInteractionListener;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Item} and makes a call to the
@@ -16,10 +18,10 @@ import java.util.List;
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Item> mValues;
+    private ArrayList<Item> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyItemRecyclerViewAdapter(List<Item> items, OnListFragmentInteractionListener listener) {
+    public MyItemRecyclerViewAdapter(ArrayList<Item> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -34,8 +36,10 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getItemId());
+        holder.mIdView.setText(String.valueOf(mValues.get(position).getItemId()));
         holder.mContentView.setText(mValues.get(position).getItemName());
+        holder.mIconView.setImageResource(mValues.get(position).getItemResource());
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,13 +62,15 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
+        public final ImageView mIconView;
         public Item mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mContentView = (TextView) view.findViewById(R.id.item_content);
+            mIconView = (ImageView) view.findViewById(R.id.item_icon);
         }
 
         @Override

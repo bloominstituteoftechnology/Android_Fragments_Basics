@@ -7,7 +7,7 @@ public class Item implements Serializable {
     private int itemId;
     private int itemResource;
     private String itemName;
-    public static ArrayList<Item> itemArrayList;
+    public static ArrayList<Item> itemArrayList = ItemFactory.getItems();
 
     public Item(int itemId, int itemResource, String itemName) {
         this.itemId = itemId;
