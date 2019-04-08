@@ -84,7 +84,7 @@ public class PokemonDao {
         return image;
     }
 
-    public static void addPokemonToFavorites(Pokemon pokemon) {
+    public static void addPokemonToRepo(Pokemon pokemon) {
         PokemonRepo.addToList(pokemon);
     }
 
