@@ -61,6 +61,10 @@ public class PokemonRepo {
         return false;
     }
 
+    public static ArrayList<Pokemon> getAllPokemon(){
+        return pokemons;
+    }
+
     public static void removeFromListByName(String name) {
         name = name.toLowerCase();
         for (int i = 0; i < pokemons.size(); i++) {

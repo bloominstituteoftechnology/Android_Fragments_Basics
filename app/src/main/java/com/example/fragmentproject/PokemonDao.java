@@ -97,6 +97,10 @@ public class PokemonDao {
         PokemonRepo.removeFromListByName(name);
     }
 
+    public static ArrayList<Pokemon> getAllPokemon(){
+        return PokemonRepo.getAllPokemon();
+    }
+
     public static boolean checkForExisitingPokemon(int num) {
         return PokemonRepo.checkForExistingPokemon(num);
     }
