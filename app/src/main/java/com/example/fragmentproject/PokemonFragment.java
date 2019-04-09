@@ -71,6 +71,7 @@ public class PokemonFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         new LoadPokemonData().execute();
+
 /*
         new Thread(new Runnable() {
             @Override
@@ -140,21 +141,22 @@ public class PokemonFragment extends Fragment {
         void onListFragmentInteraction(Pokemon pokemon);
     }
 
-    public class LoadPokemonData extends AsyncTask{
+    public class LoadPokemonData extends AsyncTask {
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            pokemon.clear();
-
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    pokemon.addAll(PokemonDao.getAllPokemon());
-                    adapter.notifyDataSetChanged();
-                }
-            });
-
+            for (int i = 0; i < PokemonDao.getAllPokemon().size(); i++) {
+                pokemon.addAll(PokemonDao.getAllPokemon());
+                PokemonDao.updatePokemon(PokemonDao.getPokemon(PokemonDao.getAllPokemon().get(i).getUrl()));
+                publishProgress();
+            }
             return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Object[] values) {
+            super.onProgressUpdate(values);
+            adapter.notifyDataSetChanged();
         }
     }
 }

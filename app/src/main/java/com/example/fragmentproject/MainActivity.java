@@ -18,8 +18,10 @@ public class MainActivity extends AppCompatActivity implements PokemonFragment.O
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 1; i < 51; i++) {
-                    PokemonDao.addPokemonToRepo(PokemonDao.getPokemon(i));
+
+                PokemonDao.setAllPokemon(PokemonDao.getPokemonURLS());
+                for (int i = 1; i < PokemonDao.getAllPokemon().size(); i++) {
+
                 }
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

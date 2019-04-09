@@ -24,8 +24,6 @@ public class NetworkAdapter {
 
         try {
             URL url = new URL(urlString);
-
-            Log.i("test2", url.toString());
             connection = (HttpsURLConnection) url.openConnection();
 
             if(headerProperties!=null) {

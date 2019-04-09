@@ -31,17 +31,20 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        holder.mIdView.setText(mValues.get(position).getName());
-        holder.mImage.setImageBitmap(mValues.get(position).getImage());
-        holder.mItem = mValues.get(position);
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    mListener.onListFragmentInteraction(holder.mItem);
+        if(!mValues.get(position).isComplete()){
+            holder.mIdView.setText(mValues.get(position).getName());
+            holder.mItem = mValues.get(position);
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (null != mListener) {
+                        mListener.onListFragmentInteraction(holder.mItem);
+                    }
                 }
-            }
-        });
+            });
+        }
+        holder.mImage.setImageBitmap(mValues.get(position).getImage());
+
     }
 
     @Override

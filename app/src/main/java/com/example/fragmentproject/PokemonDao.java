@@ -15,18 +15,37 @@ public class PokemonDao {
 
 
     private static String BASE_URL = "https://pokeapi.co/api/v2/pokemon";
-    private static String READ_POKEMON_BY_NUM = BASE_URL + "/%s";
+    private static String NAMES_URL = BASE_URL + "/?limit=10000";
 
-    public static Pokemon getPokemon(int num) {
+    public static ArrayList<Pokemon> getPokemonURLS(){
+        ArrayList<Pokemon> pokemons = new ArrayList<>();
+
+        final String result = NetworkAdapter.httpRequest(NAMES_URL);
+        try {
+            JSONObject jsonObject = new JSONObject(result);
+            JSONArray jsonResults = jsonObject.getJSONArray("results");
+
+            for(int i = 0; i < jsonResults.length(); i++){
+               JSONObject jsonPoke = jsonResults.getJSONObject(i);
+               pokemons.add(new Pokemon(jsonPoke.getString("name"), jsonPoke.getString("url")));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return pokemons;
+    }
+
+    public static Pokemon getPokemon(String url) {
 
         String[] elementType = {"", ""};
         String imageURL = "";
-        int number = num;
         String name = "";
+        int number = 0;
         ArrayList<String> movesArrList = new ArrayList<>();
         Pokemon pokemon = null;
 
-        final String result = NetworkAdapter.httpRequest(String.format(READ_POKEMON_BY_NUM, String.valueOf(num)));
+        final String result = NetworkAdapter.httpRequest(url);
         try {
             JSONObject jsonObject = new JSONObject(result);
 
@@ -38,6 +57,12 @@ public class PokemonDao {
 
             try {
                 imageURL = jsonObject.getJSONObject("sprites").getString("front_default");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                number = Integer.parseInt(jsonObject.getString("id"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -86,50 +111,16 @@ public class PokemonDao {
         return image;
     }
 
-    public static void addPokemonToRepo(Pokemon pokemon) {
-        PokemonRepo.addToList(pokemon);
-    }
-
-    public static String[] getPokemonNames() {
-        String[] names = PokemonRepo.getPokeNames();
-        return names;
-    }
-
-    public static void removePokemon(String name) {
-        PokemonRepo.removeFromListByName(name);
+    public static void setAllPokemon(ArrayList<Pokemon> pokemons){
+        PokemonRepo.setAllPokemon(pokemons);
     }
 
     public static ArrayList<Pokemon> getAllPokemon(){
         return PokemonRepo.getAllPokemon();
     }
 
-    public static boolean checkForExisitingPokemon(int num) {
-        return PokemonRepo.checkForExistingPokemon(num);
-    }
 
-    public static void removePokemonByName(String name) {
-        PokemonRepo.removeFromListByName(name);
-    }
-
-    public static String intArrToCSVString(int[] nums) {
-        String csvString = "";
-        for (int i = 0; i < nums.length; i++) {
-            if (i == nums.length) {
-                csvString += String.valueOf(nums[i]);
-            } else {
-                csvString += String.valueOf(nums[i]) + ",";
-            }
-        }
-        return csvString;
-    }
-
-    public static int[] csvStringToIntArr(String csvString) {
-        String[] numString = csvString.split(",");
-        int[] nums = new int[numString.length];
-
-        for (int i = 0; i < nums.length; i++) {
-            nums[i] = Integer.parseInt(numString[i]);
-        }
-        return nums;
+    public static void updatePokemon(Pokemon pokemon) {
+        PokemonRepo.updatePokemonByName(pokemon);
     }
 }
