@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_layout_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailsFragment">
+
+    <ImageView
+        android:id="@+id/image_view_details_icon"
+        android:layout_width="56dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="136dp"
+        android:adjustViewBounds="true"
+        android:src="@android:color/holo_blue_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_details_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="8dp"
+        android:text="NAME"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.401"
+        app:layout_constraintStart_toEndOf="@+id/text_view_details_id"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_details_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="156dp"
+        android:text="ID"
+        app:layout_constraintStart_toEndOf="@+id/image_view_details_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
