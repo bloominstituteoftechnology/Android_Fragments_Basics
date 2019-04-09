@@ -13,7 +13,7 @@ public class Pokemon implements Serializable {
     private int number;
     private String name;
     private String[] moves;
-    private boolean isComplete = false;
+    private boolean isComplete;
     ArrayList<String> movesArrList;
 
     public String getUrl() {
@@ -40,6 +40,7 @@ public class Pokemon implements Serializable {
 
     public void setElementType(String[] elementType) {
         this.elementType = elementType;
+        isComplete = false;
     }
 
     public void setImage(Bitmap image) {
