@@ -19,6 +19,17 @@ public class MainActivity extends AppCompatActivity implements PokemonListFragme
 
     @Override
     public void OnPokemonListFragmentInteractionListener(Pokemon pokemon) {
+        PokemonDetailsFragment pokemonDetailsFragment = new PokemonDetailsFragment();
 
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("pokemon_key", pokemon);
+        pokemonDetailsFragment.setArguments(bundle);
+
+        if (!getResources().getBoolean(R.bool.is_tablet)){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_details, pokemonDetailsFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }
