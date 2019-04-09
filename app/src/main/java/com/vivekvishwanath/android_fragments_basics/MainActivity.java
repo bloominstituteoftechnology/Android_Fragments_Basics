@@ -4,8 +4,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements PokemonListFragment.OnPokemonListFragmentInteractionListener  {
+ public class MainActivity extends AppCompatActivity implements PokemonListFragment.OnPokemonListFragmentInteractionListener  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +32,12 @@ public class MainActivity extends AppCompatActivity implements PokemonListFragme
                     .addToBackStack(null)
                     .commit();
         } else {
+            findViewById(R.id.main_layout).setBackgroundColor(getResources().getColor(android.R.color.white));
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, pokemonDetailsFragment)
+                    .add(R.id.fragment_container, pokemonDetailsFragment)
                     .addToBackStack(null)
                     .commit();
         }
     }
+
 }
