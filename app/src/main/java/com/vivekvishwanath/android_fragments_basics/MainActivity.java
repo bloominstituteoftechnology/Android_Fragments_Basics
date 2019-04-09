@@ -25,9 +25,14 @@ public class MainActivity extends AppCompatActivity implements PokemonListFragme
         bundle.putSerializable("pokemon_key", pokemon);
         pokemonDetailsFragment.setArguments(bundle);
 
-        if (!getResources().getBoolean(R.bool.is_tablet)){
+        if (getResources().getBoolean(R.bool.is_tablet)){
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_details, pokemonDetailsFragment)
+                    .add(R.id.fragment_details, pokemonDetailsFragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, pokemonDetailsFragment)
                     .addToBackStack(null)
                     .commit();
         }

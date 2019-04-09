@@ -74,7 +74,6 @@ public class PokemonListFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                pokemonList.clear();
                 pokemonList.addAll(PokemonDao.getAllPokemon());
                 getActivity().runOnUiThread(new Runnable() {
                     @Override

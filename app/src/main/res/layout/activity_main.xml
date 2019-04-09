@@ -13,10 +13,4 @@
         android:layout_weight="1"
         android:layout_height="match_parent"/>
 
-    <FrameLayout
-        android:id="@+id/fragment_details"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"/>
-
 </LinearLayout>
