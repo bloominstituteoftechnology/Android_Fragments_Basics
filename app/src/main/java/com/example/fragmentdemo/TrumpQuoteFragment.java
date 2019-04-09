@@ -2,8 +2,9 @@ package com.example.fragmentdemo;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -58,24 +59,24 @@ public class TrumpQuoteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_trumpquote_list, container, false);
 
 
-
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyTrumpQuoteRecyclerViewAdapter(trumpQuoteList, mListener));
-        }
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        trumpQuoteList = new ArrayList<>();
+        // Set the adapter
+        Context context = view.getContext();
+        RecyclerView recyclerView = view.findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        final MyTrumpQuoteRecyclerViewAdapter adapter = new MyTrumpQuoteRecyclerViewAdapter(trumpQuoteList, mListener);
+        recyclerView.setAdapter(adapter);
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -107,4 +108,6 @@ public class TrumpQuoteFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(TrumpQuote trumpQuote);
     }
+
+
 }
