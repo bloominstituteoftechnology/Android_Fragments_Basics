@@ -62,7 +62,9 @@ public class PokemonDao {
                 e.printStackTrace();
             }
 
-            pokemon = new Pokemon(elementType, imageURL, number, name, movesArrList);
+            Bitmap image = bitmapFromURL(imageURL);
+
+            pokemon = new Pokemon(elementType, image, number, name, movesArrList);
 
 
         } catch (JSONException e) {

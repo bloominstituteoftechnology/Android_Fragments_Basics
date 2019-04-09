@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fragmentproject.PokemonFragment.OnListFragmentInteractionListener;
@@ -31,6 +32,7 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.mIdView.setText(mValues.get(position).getName());
+        holder.mImage.setImageBitmap(mValues.get(position).getImage());
         holder.mItem = mValues.get(position);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,15 +51,16 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        //TODO: and fix this shitt
         public final View mView;
         public final TextView mIdView;
+        public final ImageView mImage;
         public Pokemon mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = view.findViewById(R.id.pokemon_name);
+            mImage = view.findViewById(R.id.thumbnail_image);
         }
     }
 }

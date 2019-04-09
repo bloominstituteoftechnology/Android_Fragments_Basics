@@ -78,27 +78,8 @@ public class DetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_details, container, false);
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     ImageView pokemonImageView;
-    TextView pokemonType1;
-    TextView pokemonType2;
-    TextView pokemonName;
-    TextView pokemonNumber;
-    LinearLayout ll;
     Pokemon pokemon;
-
-    public TextView createTextView(String text) {
-        TextView textView = new TextView(getContext());
-        textView.setText(text);
-        return textView;
-    }
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
@@ -109,7 +90,6 @@ public class DetailsFragment extends Fragment {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    new setImageAsync().execute();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -117,6 +97,7 @@ public class DetailsFragment extends Fragment {
                             ((TextView)view.findViewById(R.id.poke_type1)).setText(pokemon.getElementType()[0]);
                             ((TextView)view.findViewById(R.id.poke_type2)).setText(pokemon.getElementType()[1]);
                             ((TextView)view.findViewById(R.id.poke_num)).setText(String.valueOf(pokemon.getNumber()));
+                            ((ImageView)view.findViewById(R.id.poke_image)).setImageBitmap(pokemon.getImage());
                         }
                     });
                 }
@@ -156,24 +137,4 @@ public class DetailsFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private class setImageAsync extends AsyncTask<Void, Void, Bitmap> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            //TODO:PROGRESS BAR
-        }
-
-        @Override
-        protected Bitmap doInBackground(Void... params) {
-            Bitmap image = PokemonDao.bitmapFromURL(pokemon.getImageURL());
-            return image;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            super.onPostExecute(result);
-            pokemonImageView.setImageBitmap(result);
-        }
-
-    }
 }

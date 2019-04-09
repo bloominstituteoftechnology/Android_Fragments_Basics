@@ -1,20 +1,22 @@
 package com.example.fragmentproject;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Pokemon implements Serializable {
 
     private String[] elementType;
-    private String imageURL;
+    private Bitmap image;
     private int number;
     private String name;
     private String[] moves;
     ArrayList<String> movesArrList;
 
-    public Pokemon(String[] elementType, String imageURL, int number, String name, ArrayList<String> movesArrList) {
+    public Pokemon(String[] elementType, Bitmap image, int number, String name, ArrayList<String> movesArrList) {
         this.elementType = elementType;
-        this.imageURL = imageURL;
+        this.image = image;
         this.number = number;
         this.name = name;
         this.movesArrList = movesArrList;
@@ -30,9 +32,6 @@ public class Pokemon implements Serializable {
         return elementType;
     }
 
-    public String getImageURL() {
-        return imageURL;
-    }
 
     public int getNumber() {
         return number;
@@ -42,7 +41,7 @@ public class Pokemon implements Serializable {
         return name;
     }
 
-    public String[] getMoves() {
-        return moves;
+    public Bitmap getImage() {
+        return image;
     }
 }

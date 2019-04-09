@@ -1,6 +1,8 @@
 package com.example.fragmentproject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class PokemonFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
 
     ArrayList<Pokemon> pokemon;
-    TextView button;
+    MyPokemonRecyclerViewAdapter adapter;
 
 
     /**
@@ -64,12 +65,13 @@ public class PokemonFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         pokemon = new ArrayList<>();
-        final MyPokemonRecyclerViewAdapter adapter = new MyPokemonRecyclerViewAdapter(pokemon, mListener);
+        adapter = new MyPokemonRecyclerViewAdapter(pokemon, mListener);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-
+        new LoadPokemonData().execute();
+/*
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -83,7 +85,7 @@ public class PokemonFragment extends Fragment {
                     }
                 });
             }
-        }).start();
+        }).start();*/
     }
 
     @Override
@@ -136,5 +138,23 @@ public class PokemonFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(Pokemon pokemon);
+    }
+
+    public class LoadPokemonData extends AsyncTask{
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            pokemon.clear();
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    pokemon.addAll(PokemonDao.getAllPokemon());
+                    adapter.notifyDataSetChanged();
+                }
+            });
+
+            return null;
+        }
     }
 }
