@@ -7,21 +7,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lambda.android_fragments_basics.weightFragment.OnListFragmentInteractionListener;
-import com.lambda.android_fragments_basics.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyweightRecyclerViewAdapter extends RecyclerView.Adapter<MyweightRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Weight> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyweightRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyweightRecyclerViewAdapter(List<Weight> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -36,8 +34,8 @@ public class MyweightRecyclerViewAdapter extends RecyclerView.Adapter<MyweightRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get( position );
-        holder.mIdView.setText( mValues.get( position ).id );
-        holder.mContentView.setText( mValues.get( position ).content );
+        //holder.mIdView.setText( mValues.get( position ).id );
+        //holder.mContentView.setText( mValues.get( position ).content );
 
         holder.mView.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -60,7 +58,7 @@ public class MyweightRecyclerViewAdapter extends RecyclerView.Adapter<MyweightRe
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public Weight mItem;
 
         public ViewHolder(View view) {
             super( view );
