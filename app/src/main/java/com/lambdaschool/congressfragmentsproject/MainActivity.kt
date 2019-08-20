@@ -16,7 +16,12 @@ class MainActivity : AppCompatActivity() {
 
         /*
         .0 Jack Seymour, Android Fragments 8/20/2019 12:05 pm
-
+        .1 maybe this stuff will be useful:
+                        objectkind: CongresspersonOverview
+                fragment classnames : CongresspersonOverviewFragment
+                     object content layout file name: fragment_congresspersonoverview
+            List layout file name: fragment_congresspersonoverview_list
+                adapterclass: MyCongresspersonOverviewRecyclerViewAdapter
 
          */
         // get an overview list for all members of congress
