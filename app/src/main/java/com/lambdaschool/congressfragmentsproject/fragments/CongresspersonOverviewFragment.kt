@@ -10,9 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lambdaschool.congressfragmentsproject.R
-
-import com.lambdaschool.congressfragmentsproject.fragments.dummy.DummyContent
-import com.lambdaschool.congressfragmentsproject.fragments.dummy.DummyContent.DummyItem
+import com.lambdaschool.congressfragmentsproject.api.CongressDao
+import com.lambdaschool.congressfragmentsproject.api.CongressDao.allMembers
+import com.lambdaschool.congressfragmentsproject.api.CongresspersonDetails
+import com.lambdaschool.congressfragmentsproject.api.CongresspersonOverview
+import java.util.ArrayList
 
 /**
  * A fragment representing a list of Items.
@@ -47,7 +49,7 @@ class CongresspersonOverviewFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyCongresspersonOverviewRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter = MyCongresspersonOverviewRecyclerViewAdapter(allMembers, listener)
             }
         }
         return view
@@ -80,7 +82,7 @@ class CongresspersonOverviewFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(item: CongresspersonOverview)
     }
 
     companion object {

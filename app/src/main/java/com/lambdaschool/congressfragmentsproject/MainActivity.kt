@@ -3,9 +3,12 @@ package com.lambdaschool.congressfragmentsproject
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.Explode
+import androidx.fragment.app.Fragment
 import com.lambdaschool.congressfragmentsproject.api.CongressDao
 import com.lambdaschool.congressfragmentsproject.api.CongresspersonDetails
 import com.lambdaschool.congressfragmentsproject.api.CongresspersonOverview
+import com.lambdaschool.congressfragmentsproject.fragments.CongresspersonOverviewFragment
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +25,16 @@ class MainActivity : AppCompatActivity() {
                      object content layout file name: fragment_congresspersonoverview
             List layout file name: fragment_congresspersonoverview_list
                 adapterclass: MyCongresspersonOverviewRecyclerViewAdapter
+        .2:TODO 1.6 update xml once we know if everything works
+            added quick fragment generator so i could make sure things were working
 
          */
+
+
+
+
+
+
         // get an overview list for all members of congress
         val allMembers: ArrayList<CongresspersonOverview> = CongressDao.allMembers
 
