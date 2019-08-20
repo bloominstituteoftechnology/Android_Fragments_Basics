@@ -1,52 +1,59 @@
 package com.lambdaschool.congressfragmentsproject
 
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.Explode
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.lambdaschool.congressfragmentsproject.api.CongressDao
+import com.lambdaschool.congressfragmentsproject.api.CongressDao.allMembers
 import com.lambdaschool.congressfragmentsproject.api.CongresspersonDetails
 import com.lambdaschool.congressfragmentsproject.api.CongresspersonOverview
 import com.lambdaschool.congressfragmentsproject.fragments.CongresspersonOverviewFragment
+import com.lambdaschool.congressfragmentsproject.fragments.DetailsFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
 
-class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListFragmentInteractionListener  {
+
+class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListFragmentInteractionListener,
+    DetailsFragment.OnFragmentInteractionListener {
+
+    companion object {
+        const val ITEM_KEY = "shipping and recieving"
+    }
+    override fun onFragmentInteraction() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
     override fun onListFragmentInteraction(item: CongresspersonOverview) {
             Toast.makeText(this, "Fragment Interacted ${item.twitterAccount}", Toast.LENGTH_SHORT).show()
 
-            // show fragment as dialog
-            /*val dialogFragment: DetailFragment = DetailFragment() // DetailFragment must extend DialogFragment
 
-            val bundle = Bundle()
-            bundle.putSerializable(ItemDetail.ITEM_KEY, item)
+        val fragment = DetailsFragment()
 
-            dialogFragment.arguments = bundle
-            dialogFragment.show(supportFragmentManager, "Detail Fragment")*/
+        val bundle = Bundle()
+        bundle.putSerializable(ITEM_KEY, item.id)
 
-            // show fragment in main window
-            val fragment = CongresspersonOverviewFragment()
+        fragment.arguments = bundle
+        fragment.enterTransition = Explode()
+        fragment.exitTransition = Explode()
 
-            /*   val bundle = Bundle()
-                bundle.putSerializable(, item)
-
-                    fragment.arguments = bundle
-                    fragment.enterTransition = Explode()
-                    fragment.exitTransition = Explode()*/
-
-            /*  if(secondary_fragment_holder == null) {*/
+        if(secondary_fragment_holder == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.main_fragment_holder, fragment)
-                .addToBackStack(null)
-                .commit()
-            /*  } else {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.secondary_fragment_holder, fragment)
-                    .commit()
-            }*/
 
+                .replace(R.id.main_fragment_holder, fragment)
+                .addToBackStack("yus")
+                .commit()
+        } else {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.secondary_fragment_holder, fragment)
+                .commit()
         }
+
+    }
 
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,9 +68,10 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
                      object content layout file name: fragment_congresspersonoverview
             List layout file name: fragment_congresspersonoverview_list
                 adapterclass: MyCongresspersonOverviewRecyclerViewAdapter
-        .2:TODO 1.6 update xml once we know if everything works
+        .2:TO/DOne 1.6 update xml once we know if everything works
             added quick fragment generator so i could make sure things were working
         .31 we are likely to have to return to 1.5, 1.6, 1.7
+        .4 small revisions to xml, if possible we can return to fragment list last and make even more changes
          */
 
 
@@ -75,6 +83,21 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
 
             // get congressperson portrait
             val image: Bitmap? = allMembers[0].id?.let { CongressDao.getImage(it) }
+
+
+            val fragment = CongresspersonOverviewFragment()
+
+            /* val bundle = Bundle()
+
+        //todo implement this if possible
+                    fragment.arguments = bundle
+                    fragment.enterTransition = Explode()
+                    fragment.exitTransition = Explode()*/
+
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.secondary_fragment_holder, fragment)
+                .commit()
         }
     }
 

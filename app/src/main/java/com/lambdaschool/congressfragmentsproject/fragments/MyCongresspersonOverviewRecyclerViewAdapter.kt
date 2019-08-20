@@ -47,7 +47,8 @@ class MyCongresspersonOverviewRecyclerViewAdapter(
 
 
 
-        holder.mIdView.text = item.youtubeAccount
+        // grab name and phone number
+        holder.mIdView.text = "${item.firstName} ${item.lastName}"
         holder.mContentView.text = item.phone
 
         with(holder.mView) {
