@@ -14,6 +14,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /*
+        .0 Jack Seymour, Android Fragments 8/20/2019 12:05 pm
+
+
+         */
         // get an overview list for all members of congress
         val allMembers: ArrayList<CongresspersonOverview> = CongressDao.allMembers
 
