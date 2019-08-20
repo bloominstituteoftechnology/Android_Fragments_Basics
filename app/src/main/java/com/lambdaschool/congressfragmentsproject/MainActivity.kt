@@ -29,21 +29,18 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
 
 
     override fun onListFragmentInteraction(item: CongresspersonOverview) {
-            Toast.makeText(this, "Fragment Interacted ${item.twitterAccount}", Toast.LENGTH_SHORT).show()
 
 
         val fragment = DetailsFragment()
 
         val bundle = Bundle()
-        bundle.putSerializable(ITEM_KEY, item.id)
+        bundle.putString(ITEM_KEY, item.id)
 
-        fragment.arguments = bundle
-        fragment.enterTransition = Explode()
-        fragment.exitTransition = Explode()
+        //fragment.arguments = bundle
+            fragment.setArguments(bundle)
 
         if(secondary_fragment_holder == null) {
             supportFragmentManager.beginTransaction()
-
                 .replace(R.id.main_fragment_holder, fragment)
                 .addToBackStack("yus")
                 .commit()
@@ -72,6 +69,8 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
             added quick fragment generator so i could make sure things were working
         .31 we are likely to have to return to 1.5, 1.6, 1.7
         .4 small revisions to xml, if possible we can return to fragment list last and make even more changes
+        .4.9-4.12 debugging
+
          */
 
 
@@ -85,7 +84,7 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
             val image: Bitmap? = allMembers[0].id?.let { CongressDao.getImage(it) }
 
 
-            val fragment = CongresspersonOverviewFragment()
+
 
             /* val bundle = Bundle()
 
@@ -94,9 +93,9 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
                     fragment.enterTransition = Explode()
                     fragment.exitTransition = Explode()*/
 
-
+            val fragment = CongresspersonOverviewFragment()
             supportFragmentManager.beginTransaction()
-                .replace(R.id.secondary_fragment_holder, fragment)
+                .replace(R.id.main_fragment_holder, fragment)
                 .commit()
         }
     }

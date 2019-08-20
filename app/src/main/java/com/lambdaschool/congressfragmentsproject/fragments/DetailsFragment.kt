@@ -1,14 +1,21 @@
 package com.lambdaschool.congressfragmentsproject.fragments
 
 import android.content.Context
-import android.net.Uri
+
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
+import com.lambdaschool.congressfragmentsproject.MainActivity.Companion.ITEM_KEY
+
 import com.lambdaschool.congressfragmentsproject.R
+import com.lambdaschool.congressfragmentsproject.api.CongressDao
+
+import com.lambdaschool.congressfragmentsproject.api.CongresspersonDetails
+import kotlinx.android.synthetic.main.fragment_details.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,10 +39,18 @@ class DetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+        val id = arguments?.getString(ITEM_KEY) ?: "Not a congressman"
+        Log.i("lognow", "id = $id")
+
+        val singleMemberDetails: CongresspersonDetails? = CongressDao.getMemberDetails(id)
+
+var cracked = singleMemberDetails?.firstName ?: "test"
+        if (singleMemberDetails != null) {
+            tv_name.text =singleMemberDetails.firstName
         }
+
+
     }
 
     override fun onCreateView(
@@ -44,6 +59,11 @@ class DetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_details, container, false)
+
+
+
+
+
     }
 
 

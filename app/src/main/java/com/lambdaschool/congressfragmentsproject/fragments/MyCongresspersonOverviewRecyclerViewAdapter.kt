@@ -49,7 +49,7 @@ class MyCongresspersonOverviewRecyclerViewAdapter(
 
         // grab name and phone number
         holder.mIdView.text = "${item.firstName} ${item.lastName}"
-        holder.mContentView.text = item.phone
+        holder.mContentView.text = item.id
 
         with(holder.mView) {
             tag = item

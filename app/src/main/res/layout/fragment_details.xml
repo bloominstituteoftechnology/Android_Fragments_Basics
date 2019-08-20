@@ -10,7 +10,7 @@
     <ImageView android:layout_width="match_parent" android:layout_height="match_parent"
     android:src="@drawable/ic_launcher_background"
     android:id="@+id/iv_drawable"/>
-    <!-- TODO: Update blank fragment layout -->
+
     <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
