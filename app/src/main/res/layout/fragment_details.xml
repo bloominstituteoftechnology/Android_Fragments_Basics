@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:text="name"
             android:textSize="30dp"
-    android:id="@+id/tv_name"/>
+    android:id="@+id/tv_first_name"/>
 
 
 </FrameLayout>

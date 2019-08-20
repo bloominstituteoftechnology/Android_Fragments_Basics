@@ -45,9 +45,8 @@ class DetailsFragment : Fragment() {
 
         val singleMemberDetails: CongresspersonDetails? = CongressDao.getMemberDetails(id)
 
-var cracked = singleMemberDetails?.firstName ?: "test"
         if (singleMemberDetails != null) {
-            tv_name.text =singleMemberDetails.firstName
+            tv_first_name.text =singleMemberDetails.firstName
         }
 
 
