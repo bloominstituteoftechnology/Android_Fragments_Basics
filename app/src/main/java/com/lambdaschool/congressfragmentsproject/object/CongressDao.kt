@@ -1,6 +1,9 @@
-package com.lambdaschool.congressfragmentsproject.api
+package com.lambdaschool.congressfragmentsproject.`object`
 
 import android.graphics.Bitmap
+import com.lambdaschool.congressfragmentsproject.api.NetworkAdapter
+import com.lambdaschool.congressfragmentsproject.model.CongresspersonDetails
+import com.lambdaschool.congressfragmentsproject.model.CongresspersonOverview
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -28,13 +31,16 @@ object CongressDao {
             val data = ArrayList<CongresspersonOverview>()
 
             try {
-                val result = NetworkAdapter.httpGetRequest(URL_MEMBERS_HOUSE_ALL)
+                val result =
+                    NetworkAdapter.httpGetRequest(URL_MEMBERS_HOUSE_ALL)
                 if (result != null) {
                     val dataObject = JSONObject(result)
                     val dataJsonArray = dataObject.getJSONArray("results").getJSONObject(0).getJSONArray("members")
 
                     for (i in 0 until dataJsonArray.length()) {
-                        val officialOverview = CongresspersonOverview(dataJsonArray.getJSONObject(i))
+                        val officialOverview = CongresspersonOverview(
+                            dataJsonArray.getJSONObject(i)
+                        )
                         data.add(officialOverview)
                     }
                 }
@@ -56,11 +62,13 @@ object CongressDao {
     fun getMemberDetails(memberId: String): CongresspersonDetails {
         var congressPersonProfile: CongresspersonDetails
         try {
-            val result = NetworkAdapter.httpGetRequest(MEMBER_DETAILS + memberId + JSON)
+            val result =
+                NetworkAdapter.httpGetRequest(MEMBER_DETAILS + memberId + JSON)
             val dataObject = JSONObject(result)
             val dataJsonObject = dataObject.getJSONArray("results").getJSONObject(0)
 
-            congressPersonProfile = CongresspersonDetails(dataJsonObject)
+            congressPersonProfile =
+                CongresspersonDetails(dataJsonObject)
 
         } catch (e: JSONException) {
             e.printStackTrace()

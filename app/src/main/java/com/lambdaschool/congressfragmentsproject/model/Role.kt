@@ -1,5 +1,6 @@
-package com.lambdaschool.congressfragmentsproject.api
+package com.lambdaschool.congressfragmentsproject.model
 
+import com.lambdaschool.congressfragmentsproject.`object`.CongressDao
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -134,31 +135,58 @@ class Role {
     }
 
     constructor(jsonObject: JSONObject) {
-        this.congress = CongressDao.getStringFromJson(jsonObject, "congress")
-        this.chamber = CongressDao.getStringFromJson(jsonObject, "chamber")
+        this.congress =
+            CongressDao.getStringFromJson(jsonObject, "congress")
+        this.chamber =
+            CongressDao.getStringFromJson(jsonObject, "chamber")
         this.title = CongressDao.getStringFromJson(jsonObject, "title")
-        this.shortTitle = CongressDao.getStringFromJson(jsonObject, "short_title")
+        this.shortTitle =
+            CongressDao.getStringFromJson(jsonObject, "short_title")
         this.state = CongressDao.getStringFromJson(jsonObject, "state")
         this.party = CongressDao.getStringFromJson(jsonObject, "party")
-        this.leadershipRole = CongressDao.getStringFromJson(jsonObject, "leadership_role")
-        this.fecCandidateId = CongressDao.getStringFromJson(jsonObject, "fec_candidate_id")
-        this.seniority = CongressDao.getStringFromJson(jsonObject, "seniority")
-        this.district = CongressDao.getStringFromJson(jsonObject, "district")
-        this.isAtLarge = CongressDao.getBooleanFromJson(jsonObject, "at_large")
+        this.leadershipRole =
+            CongressDao.getStringFromJson(jsonObject, "leadership_role")
+        this.fecCandidateId =
+            CongressDao.getStringFromJson(jsonObject, "fec_candidate_id")
+        this.seniority =
+            CongressDao.getStringFromJson(jsonObject, "seniority")
+        this.district =
+            CongressDao.getStringFromJson(jsonObject, "district")
+        this.isAtLarge =
+            CongressDao.getBooleanFromJson(jsonObject, "at_large")
         this.ocdId = CongressDao.getStringFromJson(jsonObject, "ocd_id")
-        this.startDate = CongressDao.getStringFromJson(jsonObject, "start_date")
-        this.endDate = CongressDao.getStringFromJson(jsonObject, "end_date")
+        this.startDate =
+            CongressDao.getStringFromJson(jsonObject, "start_date")
+        this.endDate =
+            CongressDao.getStringFromJson(jsonObject, "end_date")
         this.office = CongressDao.getStringFromJson(jsonObject, "office")
         this.phone = CongressDao.getStringFromJson(jsonObject, "phone")
         this.fax = CongressDao.getStringFromJson(jsonObject, "fax")
-        this.contactForm = CongressDao.getStringFromJson(jsonObject, "contact_form")
-        this.billsSponsored = CongressDao.getIntFromJson(jsonObject, "bills_sponsored")
-        this.billsCosponsored = CongressDao.getIntFromJson(jsonObject, "bills_cosponsored")
-        this.missedVotesPct = CongressDao.getDoubleFromJson(jsonObject, "missed_votes_pct")
-        this.votesWithPartyPct = CongressDao.getDoubleFromJson(jsonObject, "votes_with_party_pct")
-        this.committees = Committee.getCommitteesFromJSON(CongressDao.getJSONArrayFromJson(jsonObject, "committees")!!)
+        this.contactForm =
+            CongressDao.getStringFromJson(jsonObject, "contact_form")
+        this.billsSponsored =
+            CongressDao.getIntFromJson(jsonObject, "bills_sponsored")
+        this.billsCosponsored =
+            CongressDao.getIntFromJson(jsonObject, "bills_cosponsored")
+        this.missedVotesPct =
+            CongressDao.getDoubleFromJson(jsonObject, "missed_votes_pct")
+        this.votesWithPartyPct = CongressDao.getDoubleFromJson(
+            jsonObject,
+            "votes_with_party_pct"
+        )
+        this.committees = Committee.getCommitteesFromJSON(
+            CongressDao.getJSONArrayFromJson(
+                jsonObject,
+                "committees"
+            )!!
+        )
         this.subcommittees =
-            Subcommittee.getSubCommitteesFromJSON(CongressDao.getJSONArrayFromJson(jsonObject, "subcommittees")!!)
+            Subcommittee.getSubCommitteesFromJSON(
+                CongressDao.getJSONArrayFromJson(
+                    jsonObject,
+                    "subcommittees"
+                )!!
+            )
     }
 
     companion object {

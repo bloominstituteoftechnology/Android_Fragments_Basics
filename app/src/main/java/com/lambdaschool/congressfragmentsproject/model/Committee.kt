@@ -1,5 +1,6 @@
-package com.lambdaschool.congressfragmentsproject.api
+package com.lambdaschool.congressfragmentsproject.model
 
+import com.lambdaschool.congressfragmentsproject.`object`.CongressDao
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -59,9 +60,12 @@ class Committee {
         this.apiUri = CongressDao.getStringFromJson(jsonObject, "api_uri")
         this.side = CongressDao.getStringFromJson(jsonObject, "side")
         this.title = CongressDao.getStringFromJson(jsonObject, "title")
-        this.rankInParty = CongressDao.getIntFromJson(jsonObject, "rank_in_party")
-        this.beginDate = CongressDao.getStringFromJson(jsonObject, "begin_date")
-        this.endDate = CongressDao.getStringFromJson(jsonObject, "end_date")
+        this.rankInParty =
+            CongressDao.getIntFromJson(jsonObject, "rank_in_party")
+        this.beginDate =
+            CongressDao.getStringFromJson(jsonObject, "begin_date")
+        this.endDate =
+            CongressDao.getStringFromJson(jsonObject, "end_date")
     }
 
     companion object {
