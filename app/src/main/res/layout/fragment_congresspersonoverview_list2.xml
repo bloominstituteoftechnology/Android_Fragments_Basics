@@ -10,5 +10,5 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".activity.CongresspersonOverviewFragment"
+        tools:context=".fragment.CongresspersonOverviewFragment"
         tools:listitem="@layout/fragment_congresspersonoverview2"/>

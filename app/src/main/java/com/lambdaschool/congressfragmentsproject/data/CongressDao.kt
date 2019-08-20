@@ -1,4 +1,4 @@
-package com.lambdaschool.congressfragmentsproject.`object`
+package com.lambdaschool.congressfragmentsproject.data
 
 import android.graphics.Bitmap
 import com.lambdaschool.congressfragmentsproject.api.NetworkAdapter

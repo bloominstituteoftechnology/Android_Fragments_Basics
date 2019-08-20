@@ -1,6 +1,6 @@
 package com.lambdaschool.congressfragmentsproject.model
 
-import com.lambdaschool.congressfragmentsproject.`object`.CongressDao
+import com.lambdaschool.congressfragmentsproject.data.CongressDao
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject

@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.lambdaschool.congressfragmentsproject.R
-import com.lambdaschool.congressfragmentsproject.`object`.CongressDao
+import com.lambdaschool.congressfragmentsproject.data.CongressDao
 import com.lambdaschool.congressfragmentsproject.model.CongresspersonDetails
 import com.lambdaschool.congressfragmentsproject.model.CongresspersonOverview
 import java.util.ArrayList
