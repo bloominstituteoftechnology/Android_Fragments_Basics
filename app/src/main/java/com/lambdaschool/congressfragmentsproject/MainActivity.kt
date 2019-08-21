@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
         .31 we are likely to have to return to 1.5, 1.6, 1.7
         .4 small revisions to xml, if possible we can return to fragment list last and make even more changes
         .4.9-4.12 debugging
-
+        .5.0 and we're over to 5
          */
 
 

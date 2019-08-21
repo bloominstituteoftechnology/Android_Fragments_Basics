@@ -40,14 +40,7 @@ class DetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val id = arguments?.getString(ITEM_KEY) ?: "Not a congressman"
-        Log.i("lognow", "id = $id")
 
-        val singleMemberDetails: CongresspersonDetails? = CongressDao.getMemberDetails(id)
-
-        if (singleMemberDetails != null) {
-            tv_first_name.text =singleMemberDetails.firstName
-        }
 
 
     }
@@ -64,8 +57,19 @@ class DetailsFragment : Fragment() {
 
 
     }
+//remember this
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+      val id = arguments?.getString(ITEM_KEY) ?: "Not a congressman"
+      Log.i("lognow", "id = $id")
 
+      val singleMemberDetails: CongresspersonDetails? = CongressDao.getMemberDetails(id)
+
+      if (singleMemberDetails != null) {
+          tv_first_name.text =singleMemberDetails.firstName
+      }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
