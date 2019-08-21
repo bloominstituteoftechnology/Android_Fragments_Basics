@@ -18,7 +18,7 @@ class Main2Activity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.Phone_Details_View_Holder, fragment)
-            .addToBackStack(null)
+          //  .addToBackStack(null)
             .commit()
     }
 }

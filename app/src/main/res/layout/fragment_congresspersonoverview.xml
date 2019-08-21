@@ -4,6 +4,7 @@
               android:layout_marginHorizontal="100dp"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:background="@android:color/darker_gray"
               android:orientation="horizontal">
 
 
