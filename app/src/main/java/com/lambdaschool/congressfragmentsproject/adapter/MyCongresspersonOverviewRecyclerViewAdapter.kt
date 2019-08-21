@@ -1,9 +1,11 @@
 package com.lambdaschool.congressfragmentsproject.adapter
 
+import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.lambdaschool.congressfragmentsproject.R
 import com.lambdaschool.congressfragmentsproject.fragment.CongresspersonOverviewFragment.OnListFragmentInteractionListener
@@ -19,6 +21,18 @@ class MyCongresspersonOverviewRecyclerViewAdapter(
     private val mValues: List<CongresspersonOverview>,
     private val mListener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<MyCongresspersonOverviewRecyclerViewAdapter.ViewHolder>() {
+
+    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+        val image: ImageView = mView.iv_image
+        val nameFull: TextView = mView.tv_name
+        val partyAffiliation: TextView = mView.tv_party
+        val missedVotesPercent: TextView = mView.tv_missed_votes
+        val totalPresent: TextView = mView.tv_total_present
+        val jobTitle: TextView = mView.tv_title
+        val leadershipRole: TextView = mView.tv_leadership_role
+        val seniority: TextView = mView.tv_seniority
+        val inOffice: TextView = mView.tv_in_office
+    }
 
     private val mOnClickListener: View.OnClickListener
 
@@ -37,25 +51,33 @@ class MyCongresspersonOverviewRecyclerViewAdapter(
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mValues[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.title
+    override fun getItemCount(): Int = mValues.size
 
-        with(holder.mView) {
+    override fun onBindViewHolder(hodler: ViewHolder, position: Int) {
+        val item = mValues[position]
+        val nameConstruction = "${item.lastName}, ${item.firstName} ${item.middleName}"
+        val inOfficeString = inOfficeConverter(item.isInOffice)
+
+        hodler.image.setImageURI(Uri.parse(item.apiUri))
+        hodler.nameFull.text = nameConstruction
+        hodler.partyAffiliation.text = item.party
+        hodler.missedVotesPercent.text = item.missedVotesPct.toString()
+        hodler.totalPresent.text = item.totalPresent.toString()
+        hodler.jobTitle.text = item.title
+        hodler.leadershipRole.text = item.leadershipRole
+        hodler.seniority.text = item.seniority
+        hodler.inOffice.text = inOfficeString
+
+        with(hodler.mView) {
             tag = item
             setOnClickListener(mOnClickListener)
         }
     }
 
-    override fun getItemCount(): Int = mValues.size
-
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
-
-        override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
+    private fun inOfficeConverter(data: Boolean): String {
+        return when (data) {
+            true -> "Is in Office"
+            else -> "Is not in Office"
         }
     }
 }
