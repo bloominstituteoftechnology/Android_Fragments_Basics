@@ -66,8 +66,16 @@ class DetailsFragment : Fragment() {
 
       val singleMemberDetails: CongresspersonDetails? = CongressDao.getMemberDetails(id)
 
-      if (singleMemberDetails != null) {
-          tv_first_name.text =singleMemberDetails.firstName
+      if (singleMemberDetails != null && sin) {
+
+          //twittercheck
+          var tweet = "${singleMemberDetails.firstName}  ${singleMemberDetails.lastName}"
+          if (singleMemberDetails.twitterAccount != null && singleMemberDetails.twitterAccount != "null") {
+              tweet += "\nTwitter account: ${singleMemberDetails.twitterAccount}"
+          }
+              tv_first_name.text = tweet
+
+
           iv_drawable.setImageBitmap(CongressDao.getImage(id))
       }
     }
