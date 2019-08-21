@@ -1,14 +1,10 @@
-package com.lambdaschool.congressfragmentsproject
+package com.lambdaschool.congressfragmentsproject.fragments.activity
 
 import android.graphics.Bitmap
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.Explode
-import android.widget.Toast
-import androidx.fragment.app.Fragment
+import com.lambdaschool.congressfragmentsproject.R
 import com.lambdaschool.congressfragmentsproject.api.CongressDao
-import com.lambdaschool.congressfragmentsproject.api.CongressDao.allMembers
 import com.lambdaschool.congressfragmentsproject.api.CongresspersonDetails
 import com.lambdaschool.congressfragmentsproject.api.CongresspersonOverview
 import com.lambdaschool.congressfragmentsproject.fragments.CongresspersonOverviewFragment
@@ -71,6 +67,7 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
         .4 small revisions to xml, if possible we can return to fragment list last and make even more changes
         .4.9-4.12 debugging
         .5.0 and we're over to 5
+        .5.2 
          */
 
 
