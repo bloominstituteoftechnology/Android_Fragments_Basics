@@ -68,6 +68,7 @@ class DetailsFragment : Fragment() {
 
       if (singleMemberDetails != null) {
           tv_first_name.text =singleMemberDetails.firstName
+          iv_drawable.setImageBitmap(CongressDao.getImage(id))
       }
     }
 
