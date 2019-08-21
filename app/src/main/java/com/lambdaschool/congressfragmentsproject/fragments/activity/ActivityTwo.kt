@@ -2,12 +2,12 @@ package com.lambdaschool.congressfragmentsproject.fragments.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.lambdaschool.congressfragmentsproject.R
 import com.lambdaschool.congressfragmentsproject.api.CongresspersonOverview
 import com.lambdaschool.congressfragmentsproject.fragments.CongresspersonOverviewFragment
 import com.lambdaschool.congressfragmentsproject.fragments.DetailsFragment
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_two.*
+
+
+
 
 class ActivityTwo : AppCompatActivity(), CongresspersonOverviewFragment.OnListFragmentInteractionListener,
     DetailsFragment.OnFragmentInteractionListener  {
@@ -32,7 +32,7 @@ class ActivityTwo : AppCompatActivity(), CongresspersonOverviewFragment.OnListFr
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_two)
+        setContentView(com.lambdaschool.congressfragmentsproject.R.layout.activity_two)
 
 
 /*        val fragment = CongresspersonOverviewFragment()
@@ -40,15 +40,17 @@ class ActivityTwo : AppCompatActivity(), CongresspersonOverviewFragment.OnListFr
             .replace(R.id.main_fragment_holder_two, fragment)
             .commit()*/
         val fragment = DetailsFragment()
+        val extras = intent.extras
+        val id = extras!!.getString(MainActivity.ITEM_KEY)
 
         val bundle = Bundle()
-        bundle.putString(MainActivity.ITEM_KEY, )
+        bundle.putString(MainActivity.ITEM_KEY, id)
 
         //fragment.arguments = bundle
         fragment.setArguments(bundle)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fragment_holder_two, fragment)
-            .addToBackStack("yus")
+            .replace(com.lambdaschool.congressfragmentsproject.R.id.main_fragment_holder_two, fragment)
+            .addToBackStack("thisbacko")
             .commit()
     }
 }

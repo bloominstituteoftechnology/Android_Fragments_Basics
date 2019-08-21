@@ -2,6 +2,7 @@ package com.lambdaschool.congressfragmentsproject.fragments.activity
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.lambdaschool.congressfragmentsproject.R
@@ -46,7 +47,9 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
                 .addToBackStack("yus")
                 .commit()*/
         } else {
-            val intent = Intent(this, ActivityTwo::class.java),
+            val intent = Intent(this, ActivityTwo::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
 
         }
 
@@ -72,6 +75,15 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
         .4.9-4.12 debugging
         .5.0 and we're over to 5
         .5.2
+        5.4 we are technically done. Looks terrible and barely gets any of the data displayed but it completes the project reqs
+         we enter the application, if the size is 600 or less (our bool remains false) then we switch intents to activity two on click,
+         passing an id which is then passed to the detail fragment presented within frame.
+         TODO: actually make it display anything useful
+         TODO: see if we can get one of these pictures to display
+         TODO: make it a popup dialog instead as per challenge.
+         final note: thanks to a couple dumb bugs I've had to step through this with the debugger too much, but what i do know is you can pull id virtually anytime
+
+
          */
 
 
