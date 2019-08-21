@@ -6,20 +6,19 @@
 
               android:orientation="horizontal">
 
-    <FrameLayout
+<!--    <FrameLayout
             android:id="@+id/secondary_fragment_holder_two"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
 
             android:name="com.lambdaschool.congressfragmentsproject.fragments.DetailsFragment"
-    ></FrameLayout>
+    ></FrameLayout>-->
     <FrameLayout
+            android:id="@+id/main_fragment_holder_two"
             android:name="com.lambdaschool.congressfragmentsproject.fragments.CongresspersonOverviewFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:id="@+id/main_fragment_holder_two"
-            tools:ignore="Suspicious0dp"
-    ></FrameLayout>
+            tools:ignore="Suspicious0dp"></FrameLayout>
 </LinearLayout>

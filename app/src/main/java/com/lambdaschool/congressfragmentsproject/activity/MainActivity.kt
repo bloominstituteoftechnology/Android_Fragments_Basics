@@ -28,14 +28,14 @@ import java.util.ArrayList
   .5.0 and we're over to 5
   .5.2
   5.4 we are technically done. Looks terrible and barely gets any of the data displayed but it completes the project reqs
-   we enter the application, if the size is 600 or less (our bool remains false) then we switch intents to activity two on click,
+   we enter the application, if the size is 600 or less (our bool remains false) then we switch intents to activity two. On click,
    passing an id which is then passed to the detail fragment presented within frame.
    TODO: ActivityTwo back button doesn't work well, but why? try to remember to ask basil about this or something
    TODONE: actually make it display anything useful
    TODONE: see if we can get one of these pictures to display
    TODO: make it a popup dialog instead as per challenge.
    final note: thanks to a couple dumb bugs I've had to step through this with the debugger too much, but what i do know is you can pull id virtually anytime
-        
+
 
    */
 
@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity(),
                 .addToBackStack("yus")
                 .commit()*/
         } else {
+            //cool we can use the same bundle for the intent
             val intent = Intent(this, ActivityTwo::class.java)
             intent.putExtras(bundle)
             startActivity(intent)

@@ -66,7 +66,7 @@ class DetailsFragment : Fragment() {
 
       val singleMemberDetails: CongresspersonDetails? = CongressDao.getMemberDetails(id)
 
-      if (singleMemberDetails != null && sin) {
+      if (singleMemberDetails != null) {
 
           //twittercheck
           var tweet = "${singleMemberDetails.firstName}  ${singleMemberDetails.lastName}"
