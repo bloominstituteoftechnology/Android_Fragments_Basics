@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
         5.4 we are technically done. Looks terrible and barely gets any of the data displayed but it completes the project reqs
          we enter the application, if the size is 600 or less (our bool remains false) then we switch intents to activity two on click,
          passing an id which is then passed to the detail fragment presented within frame.
+         TODO: ActivityTwo back button doesn't work well, but why? try to remember to ask basil about this or something
          TODO: actually make it display anything useful
          TODO: see if we can get one of these pictures to display
          TODO: make it a popup dialog instead as per challenge.
