@@ -1,16 +1,16 @@
-package com.lambdaschool.congressfragmentsproject.fragments.activity
+package com.lambdaschool.congressfragmentsproject.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.lambdaschool.congressfragmentsproject.api.CongresspersonOverview
 import com.lambdaschool.congressfragmentsproject.fragments.CongresspersonOverviewFragment
 import com.lambdaschool.congressfragmentsproject.fragments.DetailsFragment
+import com.lambdaschool.congressfragmentsproject.R
+import com.lambdaschool.congressfragmentsproject.api.CongresspersonOverview
 
 
-
-
-class ActivityTwo : AppCompatActivity(), CongresspersonOverviewFragment.OnListFragmentInteractionListener,
-    DetailsFragment.OnFragmentInteractionListener  {
+class ActivityTwo : AppCompatActivity(),
+    CongresspersonOverviewFragment.OnListFragmentInteractionListener,
+    DetailsFragment.OnFragmentInteractionListener {
     override fun onFragmentInteraction() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -32,7 +32,7 @@ class ActivityTwo : AppCompatActivity(), CongresspersonOverviewFragment.OnListFr
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.lambdaschool.congressfragmentsproject.R.layout.activity_two)
+        setContentView(R.layout.activity_two)
 
 
 /*        val fragment = CongresspersonOverviewFragment()
@@ -49,7 +49,7 @@ class ActivityTwo : AppCompatActivity(), CongresspersonOverviewFragment.OnListFr
         //fragment.arguments = bundle
         fragment.setArguments(bundle)
         supportFragmentManager.beginTransaction()
-            .replace(com.lambdaschool.congressfragmentsproject.R.id.main_fragment_holder_two, fragment)
+            .replace(R.id.main_fragment_holder_two, fragment)
             .addToBackStack("thisbacko")
             .commit()
     }

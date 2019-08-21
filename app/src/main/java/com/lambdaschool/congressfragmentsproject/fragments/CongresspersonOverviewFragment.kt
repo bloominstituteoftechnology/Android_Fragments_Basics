@@ -9,12 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.lambdaschool.congressfragmentsproject.recycleview.MyCongresspersonOverviewRecyclerViewAdapter
 import com.lambdaschool.congressfragmentsproject.R
-import com.lambdaschool.congressfragmentsproject.api.CongressDao
 import com.lambdaschool.congressfragmentsproject.api.CongressDao.allMembers
-import com.lambdaschool.congressfragmentsproject.api.CongresspersonDetails
 import com.lambdaschool.congressfragmentsproject.api.CongresspersonOverview
-import java.util.ArrayList
 
 /**
  * A fragment representing a list of Items.
@@ -49,7 +47,11 @@ class CongresspersonOverviewFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyCongresspersonOverviewRecyclerViewAdapter(allMembers, listener)
+                adapter =
+                    MyCongresspersonOverviewRecyclerViewAdapter(
+                        allMembers,
+                        listener
+                    )
             }
         }
         return view

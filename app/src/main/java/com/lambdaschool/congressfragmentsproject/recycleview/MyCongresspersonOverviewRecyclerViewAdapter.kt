@@ -1,4 +1,4 @@
-package com.lambdaschool.congressfragmentsproject.fragments
+package com.lambdaschool.congressfragmentsproject.recycleview
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater

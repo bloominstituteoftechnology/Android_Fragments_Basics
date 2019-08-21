@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.lambdaschool.congressfragmentsproject.fragments.activity.MainActivity.Companion.ITEM_KEY
-
 import com.lambdaschool.congressfragmentsproject.R
+
+import com.lambdaschool.congressfragmentsproject.activity.MainActivity.Companion.ITEM_KEY
+
 import com.lambdaschool.congressfragmentsproject.api.CongressDao
 
 import com.lambdaschool.congressfragmentsproject.api.CongresspersonDetails
