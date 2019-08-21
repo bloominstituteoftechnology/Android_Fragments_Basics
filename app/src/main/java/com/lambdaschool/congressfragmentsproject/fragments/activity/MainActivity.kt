@@ -1,5 +1,6 @@
 package com.lambdaschool.congressfragmentsproject.fragments.activity
 
+import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -35,15 +36,18 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
         //fragment.arguments = bundle
             fragment.setArguments(bundle)
 
-        if(secondary_fragment_holder == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.main_fragment_holder, fragment)
-                .addToBackStack("yus")
-                .commit()
-        } else {
+        if(getResources().getBoolean(R.bool.is_tablet)) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.secondary_fragment_holder, fragment)
                 .commit()
+
+            /*supportFragmentManager.beginTransaction()
+                .replace(R.id.main_fragment_holder, fragment)
+                .addToBackStack("yus")
+                .commit()*/
+        } else {
+            val intent = Intent(this, ActivityTwo::class.java),
+
         }
 
     }
@@ -67,7 +71,7 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
         .4 small revisions to xml, if possible we can return to fragment list last and make even more changes
         .4.9-4.12 debugging
         .5.0 and we're over to 5
-        .5.2 
+        .5.2
          */
 
 

@@ -18,24 +18,15 @@ class ActivityTwo : AppCompatActivity(), CongresspersonOverviewFragment.OnListFr
     override fun onListFragmentInteraction(item: CongresspersonOverview) {
 
 
-        val fragment = DetailsFragment()
 
-        val bundle = Bundle()
-        bundle.putString(MainActivity.ITEM_KEY, item.id)
 
-        //fragment.arguments = bundle
-        fragment.setArguments(bundle)
+   /*     if(secondary_fragment_holder_two == null) {*/
 
-        if(secondary_fragment_holder_two == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.main_fragment_holder_two, fragment)
-                .addToBackStack("yus")
-                .commit()
-        } else {
+   /*     } else {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.secondary_fragment_holder_two, fragment)
                 .commit()
-        }
+        }*/
 
     }
 
@@ -44,9 +35,20 @@ class ActivityTwo : AppCompatActivity(), CongresspersonOverviewFragment.OnListFr
         setContentView(R.layout.activity_two)
 
 
-        val fragment = CongresspersonOverviewFragment()
+/*        val fragment = CongresspersonOverviewFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_fragment_holder_two, fragment)
+            .commit()*/
+        val fragment = DetailsFragment()
+
+        val bundle = Bundle()
+        bundle.putString(MainActivity.ITEM_KEY, )
+
+        //fragment.arguments = bundle
+        fragment.setArguments(bundle)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fragment_holder_two, fragment)
+            .addToBackStack("yus")
             .commit()
     }
 }
