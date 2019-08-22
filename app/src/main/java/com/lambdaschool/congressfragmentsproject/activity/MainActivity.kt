@@ -7,13 +7,30 @@ import android.widget.Toast
 import com.lambdaschool.congressfragmentsproject.R
 import com.lambdaschool.congressfragmentsproject.data.CongressDao
 import com.lambdaschool.congressfragmentsproject.fragment.CongresspersonOverviewFragment
+import com.lambdaschool.congressfragmentsproject.fragment.DetailsFragment
 import com.lambdaschool.congressfragmentsproject.model.CongresspersonDetails
 import com.lambdaschool.congressfragmentsproject.model.CongresspersonOverview
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListFragmentInteractionListener {
+
+    companion object {
+        const val FRAGMENT_KEY = "098HF18672G4FPIJH"
+    }
+
     override fun onListFragmentInteraction(item: CongresspersonOverview?) {
-        Toast.makeText(this, "MainActivity fragment", Toast.LENGTH_SHORT).show()
+
+        val fragment = DetailsFragment()
+
+        val bundle = Bundle()
+        bundle.putSerializable(FRAGMENT_KEY, item?.id)
+        fragment.arguments = bundle
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_activity_fragment_hodler, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,5 +46,4 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
         // get congressperson portrait
         val image: Bitmap? = allMembers[0].id?.let { CongressDao.getImage(it) }
     }
-
 }

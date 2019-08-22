@@ -1,15 +1,14 @@
 package com.lambdaschool.congressfragmentsproject.adapter
 
-import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import com.lambdaschool.congressfragmentsproject.R
 import com.lambdaschool.congressfragmentsproject.fragment.CongresspersonOverviewFragment.OnListFragmentInteractionListener
 import com.lambdaschool.congressfragmentsproject.model.CongresspersonOverview
+import com.lambdaschool.congressfragmentsproject.util.CongresspersonStringConstruction
 import kotlinx.android.synthetic.main.fragment_congresspersonoverview2.view.*
 
 /**
@@ -50,37 +49,16 @@ class MyCongresspersonOverviewRecyclerViewAdapter(
 
     override fun onBindViewHolder(hodler: ViewHolder, position: Int) {
         val item = mValues[position]
-        val partyState = "(${item.party})-${item.state}"
-        val votesMissed = "${item.missedVotesPct}%"
 
-        hodler.nameFull.text = nameConstruction(item.firstName, item.middleName, item.lastName)
-        hodler.partyAffiliationState.text = partyState
-        hodler.missedVotesPercent.text = votesMissed
+        hodler.nameFull.text = CongresspersonStringConstruction.nameConstruction(item.firstName, item.middleName, item.lastName)
+        hodler.partyAffiliationState.text = CongresspersonStringConstruction.partyStateConstruction(item.party, item.state)
+        hodler.missedVotesPercent.text = CongresspersonStringConstruction.votesMissedConstruction(item.missedVotesPct)
         hodler.totalPresent.text = item.totalPresent.toString()
 
-        with(hodler.mView) {
-            tag = item
-            setOnClickListener(mOnClickListener)
-        }
-    }
-
-    private fun nameConstruction(firstName: String?, middleName: String?, lastName: String?): String {
-        val array = Array<String?>(3) {""}
-        array[0] = lastName
-        array[1] = firstName
-        array[2] = middleName
-
-        var fullName = ""
-
-        for (i in 0 until array.size) {
-            if (array[i] != "null") {
-                when {
-                    i == 0 -> fullName += "${array[i]},"
-                    else -> fullName += " ${array[i]}"
-                }
+        hodler.mView.setOnClickListener {
+            if (mListener != null) {
+                mListener.onListFragmentInteraction(mValues[position])
             }
         }
-
-        return fullName
     }
 }
