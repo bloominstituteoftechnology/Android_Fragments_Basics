@@ -12,6 +12,13 @@ class PhoneActivity : AppCompatActivity(), DetailsFragment.OnFragmentInteraction
     }
 
     override fun onFragmentInteraction(uri: Uri) {
+        val fragment = DetailsFragment()
+        val bundle = Bundle()
+        val item_id = intent.getStringExtra("item_key")
+        bundle.putString("item_key", item_id)
 
+        supportFragmentManager.beginTransaction()
+            .replace(, fragment)
+            .commit()
     }
 }
