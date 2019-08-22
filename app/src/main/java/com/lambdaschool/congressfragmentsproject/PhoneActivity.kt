@@ -18,7 +18,7 @@ class PhoneActivity : AppCompatActivity(), DetailsFragment.OnFragmentInteraction
         bundle.putString("item_key", item_id)
 
         supportFragmentManager.beginTransaction()
-            .replace(, fragment)
+            .replace(R.id.phone_frame_layout, fragment)
             .commit()
     }
 }

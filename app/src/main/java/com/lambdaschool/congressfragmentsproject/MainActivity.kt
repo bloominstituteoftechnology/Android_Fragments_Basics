@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
 
     override fun onListFragmentInteraction(item: CongresspersonOverview?) {
 
-        if(resources.getBoolean(R.bool.is_tablet) == true) {
+        if(resources.getBoolean(R.bool.is_tablet)) {
             val detailsFragment = DetailsFragment()
             val bundle = Bundle()
             bundle.putSerializable("item_key", item?.id)
             detailsFragment.arguments = bundle
-            getSupportFragmentManager().beginTransaction().replace(R, detailsFragment).commit()
+            getSupportFragmentManager().beginTransaction().replace(R.id.details_frame_layout, detailsFragment).commit()
         } else{
             val intent = Intent(this, PhoneActivity::class.java)
             intent.putExtra("item_key", item?.id)
