@@ -33,7 +33,7 @@ class DetailsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var listener: CongresspersonOverviewFragment.OnListFragmentInteractionListener? = null
+    // private var listener: CongresspersonOverviewFragment.OnListFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,25 +54,28 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val congresspersonId = arguments?.getSerializable(MainActivity.FRAGMENT_KEY) as String? ?: "N00033997"
+        val congresspersonId = arguments?.getString(MainActivity.FRAGMENT_KEY).toString()
         val congresspersonDeets = CongressDao.getMemberDetails(congresspersonId)
         tv_fragment_details_name.text = CongresspersonStringConstruction.nameConstruction(
             congresspersonDeets.firstName,
             congresspersonDeets.middleName,
-            congresspersonDeets.lastName)
-        tv_fragment_details_party.text = CongresspersonStringConstruction.partyStateConstruction(
-            congresspersonDeets.currentParty,
-            null)
+            congresspersonDeets.lastName
+        )
+        tv_fragment_details_party.text =
+            CongresspersonStringConstruction.partyStateConstruction(
+                congresspersonDeets.currentParty,
+                null
+            )
     }
 
-    override fun onAttach(context: Context) {
+    /*override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is CongresspersonOverviewFragment.OnListFragmentInteractionListener) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
-    }
+    }*/
 
     /*override fun onDetach() {
         super.onDetach()

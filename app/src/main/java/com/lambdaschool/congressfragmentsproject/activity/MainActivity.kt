@@ -1,5 +1,6 @@
 package com.lambdaschool.congressfragmentsproject.activity
 
+import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,17 +21,23 @@ class MainActivity : AppCompatActivity(), CongresspersonOverviewFragment.OnListF
     }
 
     override fun onListFragmentInteraction(item: CongresspersonOverview?) {
+        if(resources.getBoolean(R.bool.is_tablet)) {
 
-        val fragment = DetailsFragment()
+            val fragment = DetailsFragment()
 
-        val bundle = Bundle()
-        bundle.putSerializable(FRAGMENT_KEY, item?.id)
-        fragment.arguments = bundle
+            val bundle = Bundle()
+            bundle.putString(FRAGMENT_KEY, item?.id)
+            fragment.arguments = bundle
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_activity_fragment_hodler, fragment)
-            .addToBackStack(null)
-            .commit()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_activity_fragment_hodler, fragment)
+                .addToBackStack(null)
+                .commit()
+        } else {
+            val intent = Intent(this, MainActivityTwo::class.java)
+            intent.putExtra(FRAGMENT_KEY, item?.id)
+            startActivity(intent)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
