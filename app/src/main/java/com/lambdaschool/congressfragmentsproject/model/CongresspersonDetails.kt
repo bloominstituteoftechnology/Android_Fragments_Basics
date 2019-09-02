@@ -1,5 +1,6 @@
-package com.lambdaschool.congressfragmentsproject.api
+package com.lambdaschool.congressfragmentsproject.model
 
+import com.lambdaschool.congressfragmentsproject.data.CongressDao
 import org.json.JSONObject
 
 import java.util.ArrayList
@@ -165,30 +166,54 @@ class CongresspersonDetails {
     }
 
     constructor(jsonObject: JSONObject) {
-        this.memberId = CongressDao.getStringFromJson(jsonObject, "member_id")
-        this.firstName = CongressDao.getStringFromJson(jsonObject, "first_name")
-        this.middleName = CongressDao.getStringFromJson(jsonObject, "middle_name")
-        this.lastName = CongressDao.getStringFromJson(jsonObject, "last_name")
+        this.memberId =
+            CongressDao.getStringFromJson(jsonObject, "member_id")
+        this.firstName =
+            CongressDao.getStringFromJson(jsonObject, "first_name")
+        this.middleName =
+            CongressDao.getStringFromJson(jsonObject, "middle_name")
+        this.lastName =
+            CongressDao.getStringFromJson(jsonObject, "last_name")
         this.suffix = CongressDao.getStringFromJson(jsonObject, "suffix")
-        this.dateOfBirth = CongressDao.getStringFromJson(jsonObject, "date_of_birth")
+        this.dateOfBirth =
+            CongressDao.getStringFromJson(jsonObject, "date_of_birth")
         this.gender = CongressDao.getStringFromJson(jsonObject, "gender")
         this.url = CongressDao.getStringFromJson(jsonObject, "url")
-        this.timesTopicsUrl = CongressDao.getStringFromJson(jsonObject, "times_topics_url")
-        this.timesTag = CongressDao.getStringFromJson(jsonObject, "times_tag")
-        this.govtrackId = CongressDao.getStringFromJson(jsonObject, "govtrack_id")
-        this.cspanId = CongressDao.getStringFromJson(jsonObject, "cspan_id")
-        this.votesmartId = CongressDao.getStringFromJson(jsonObject, "votesmart_id")
-        this.icpsrId = CongressDao.getStringFromJson(jsonObject, "icpsr_id")
-        this.twitterAccount = CongressDao.getStringFromJson(jsonObject, "twitter_account")
-        this.facebookAccount = CongressDao.getStringFromJson(jsonObject, "facebook_account")
-        this.youtubeAccount = CongressDao.getStringFromJson(jsonObject, "youtube_account")
+        this.timesTopicsUrl =
+            CongressDao.getStringFromJson(jsonObject, "times_topics_url")
+        this.timesTag =
+            CongressDao.getStringFromJson(jsonObject, "times_tag")
+        this.govtrackId =
+            CongressDao.getStringFromJson(jsonObject, "govtrack_id")
+        this.cspanId =
+            CongressDao.getStringFromJson(jsonObject, "cspan_id")
+        this.votesmartId =
+            CongressDao.getStringFromJson(jsonObject, "votesmart_id")
+        this.icpsrId =
+            CongressDao.getStringFromJson(jsonObject, "icpsr_id")
+        this.twitterAccount =
+            CongressDao.getStringFromJson(jsonObject, "twitter_account")
+        this.facebookAccount =
+            CongressDao.getStringFromJson(jsonObject, "facebook_account")
+        this.youtubeAccount =
+            CongressDao.getStringFromJson(jsonObject, "youtube_account")
         this.crpId = CongressDao.getStringFromJson(jsonObject, "crp_id")
-        this.googleEntityId = CongressDao.getStringFromJson(jsonObject, "google_entity_id")
+        this.googleEntityId =
+            CongressDao.getStringFromJson(jsonObject, "google_entity_id")
         this.rssUrl = CongressDao.getStringFromJson(jsonObject, "rss_url")
-        this.isInOffice = CongressDao.getBooleanFromJson(jsonObject, "in_office")
-        this.currentParty = CongressDao.getStringFromJson(jsonObject, "current_party")
-        this.mostRecentVote = CongressDao.getStringFromJson(jsonObject, "most_recent_vote")
-        this.lastUpdated = CongressDao.getStringFromJson(jsonObject, "last_updated")
-        this.roles = Role.getRolesFromJSON(CongressDao.getJSONArrayFromJson(jsonObject, "roles")!!)
+        this.isInOffice =
+            CongressDao.getBooleanFromJson(jsonObject, "in_office")
+        this.currentParty =
+            CongressDao.getStringFromJson(jsonObject, "current_party")
+        this.mostRecentVote =
+            CongressDao.getStringFromJson(jsonObject, "most_recent_vote")
+        this.lastUpdated =
+            CongressDao.getStringFromJson(jsonObject, "last_updated")
+        this.roles = Role.getRolesFromJSON(
+            CongressDao.getJSONArrayFromJson(
+                jsonObject,
+                "roles"
+            )!!
+        )
     }
 }

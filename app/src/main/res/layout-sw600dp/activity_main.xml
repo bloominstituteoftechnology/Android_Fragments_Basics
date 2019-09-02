@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main_activity_fragment_hodler"
     tools:context=".activity.MainActivity">
 
     <fragment
+        android:layout_weight="1"
         android:name="com.lambdaschool.congressfragmentsproject.fragment.CongresspersonOverviewFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:layout_weight="2"
+        android:id="@+id/secondary_main_activity_fragment_hodler"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
 
     <!--<TextView
         android:text="List Fragment"
@@ -20,4 +29,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />-->
 
-</FrameLayout>
+</LinearLayout>
